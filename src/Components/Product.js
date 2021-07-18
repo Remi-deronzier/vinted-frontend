@@ -1,12 +1,15 @@
 import { currencyFormat } from "../helpers/helper";
 import "./Product.css";
+import avatar from "../assets/images/avatar.png";
 
 const Product = ({ offer }) => {
   return (
     <>
       <div className="owner-details">
         <img
-          src={offer.owner.account.avatar.url}
+          src={
+            offer.owner.account.avatar ? offer.owner.account.avatar.url : avatar
+          }
           alt={offer.owner.account.username}
           className="avatar"
         />

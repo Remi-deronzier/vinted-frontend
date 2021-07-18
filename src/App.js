@@ -17,7 +17,7 @@ function App() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://vinted-api-remi.herokuapp.com/offers"
+        "https://vinted-api-remi.herokuapp.com/offers?limit=50"
       );
       setData(response.data);
       setIsLoading(false);
