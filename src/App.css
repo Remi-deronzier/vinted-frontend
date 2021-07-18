@@ -1,1 +1,11 @@
-/* Other rules */
+html {
+  font-size: 62.5%; /* Resize `rem` compared to `px` to make easy calculations */
+}
+
+body {
+  font-size: 2rem;
+}
+
+.logo-vinted {
+  height: 3rem;
+}
