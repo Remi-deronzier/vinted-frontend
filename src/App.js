@@ -5,6 +5,10 @@ import axios from "axios";
 import OfferPage from "./pages/OfferPage";
 import Home from "./Components/Home";
 import Header from "./Components/Header";
+import Footer from "./Components/Footer";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+library.add(faSearch);
 
 function App() {
   const [data, setData] = useState({});
@@ -39,6 +43,7 @@ function App() {
           <OfferPage />
         </Route>
       </Switch>
+      <Footer />
     </Router>
   );
 }

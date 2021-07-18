@@ -1,0 +1,79 @@
+.logo-vinted {
+  height: 3rem;
+}
+
+header {
+  height: var(--height--header);
+  border-bottom: solid 0.1rem #ece9e9;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 99;
+  background-color: #fff;
+}
+
+.wrapper-header {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-call1 {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.search-bar {
+  position: relative;
+  margin-left: 5rem;
+  width: 60%;
+}
+
+.search-input {
+  font-size: 1.6rem;
+  height: 4rem;
+  background-color: #f5f6f7;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0 4rem;
+  box-sizing: border-box;
+  width: 100%;
+  outline: none;
+}
+
+.icon-search {
+  font-size: 1.6rem;
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #a8a8a8;
+}
+
+.btn-signUp,
+.btn-logIn,
+.btn-send-clothes {
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #fff;
+  height: 3rem;
+  color: var(--main-green);
+  border: solid 0.1rem var(--main-green);
+  font-size: 1.2rem;
+}
+
+.btn-send-clothes {
+  background-color: var(--main-green);
+  color: white;
+  white-space: nowrap;
+}
+
+.btn-signUp {
+  margin-left: 5rem;
+}
+
+.btn-logIn {
+  margin-left: 1rem;
+}

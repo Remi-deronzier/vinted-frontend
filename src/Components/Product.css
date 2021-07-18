@@ -1,0 +1,40 @@
+.owner-details {
+  display: flex;
+  align-items: center;
+  margin-left: var(--product-offset);
+  margin-bottom: var(--product-offset);
+}
+
+.avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}
+
+.owner-username {
+  margin-left: 1rem;
+}
+
+.product-image {
+  width: 100%;
+  height: 35rem;
+  object-fit: cover;
+}
+
+.product-price {
+  font-size: 1.4rem;
+  color: #111111;
+  font-weight: bold;
+}
+
+.product-details {
+  margin-left: var(--product-offset);
+  line-height: 1.6rem;
+}
+
+.product-size,
+.product-brand,
+.owner-username {
+  font-size: 1.2rem;
+  color: #999999;
+}

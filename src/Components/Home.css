@@ -1,0 +1,14 @@
+.main-content {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10rem !important;
+}
+
+.product {
+  width: calc(20% - 1.2rem);
+  margin-bottom: 5rem;
+}
+
+.product:not(:nth-child(5n + 5)) {
+  margin-right: 1.5rem;
+}

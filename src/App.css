@@ -1,11 +1,27 @@
+:root {
+  --main-green: #09aeb7;
+  --height--header: 5.2rem;
+  --product-offset: 1rem;
+}
+
 html {
   font-size: 62.5%; /* Resize `rem` compared to `px` to make easy calculations */
 }
 
 body {
   font-size: 2rem;
+  font-family: "Maison Neue";
 }
 
-.logo-vinted {
-  height: 3rem;
+.container {
+  margin: 0 auto;
+  width: 1240px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
 }
