@@ -13,22 +13,53 @@ library.add(faSearch);
 function App() {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        "https://vinted-api-remi.herokuapp.com/offers?limit=50"
-      );
-      setData(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      alert("an error has occured");
-    }
-  };
+  const [page, setPage] = useState([]);
+  const [pageChoice, setPageChoice] = useState(1);
+  const [limit, setLimit] = useState(5);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    const fetchDataHome = async () => {
+      try {
+        const response = await axios.get(
+          `https://vinted-api-remi.herokuapp.com/offers?limit=${limit}`
+        );
+        setData(response.data);
+        setIsLoading(false);
+        const numberOfPages = Math.ceil(response.data.count / limit);
+        const arrayPage = new Array(numberOfPages)
+          .fill(0)
+          .map((element, index) => index + 1);
+        setPage(arrayPage);
+      } catch (error) {
+        alert("an error has occured");
+      }
+    };
+    fetchDataHome();
+  }, [limit]);
+
+  useEffect(() => {
+    const fetchDataPage = async () => {
+      try {
+        const response = await axios.get(
+          `https://vinted-api-remi.herokuapp.com/offers?page=${pageChoice}&limit=${limit}`
+        );
+        setData(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        alert("an error has occured");
+      }
+    };
+    fetchDataPage();
+  }, [pageChoice, limit]);
+
+  const handlePage = (page) => {
+    setPageChoice(page);
+    setIsLoading(true);
+  };
+
+  const handleChangeSelect = (e) => {
+    setLimit(e.target.value);
+  };
 
   return isLoading ? (
     <p>Downloading...</p>
@@ -37,8 +68,22 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/">
-          <Home data={data} />
+          <Home
+            data={data}
+            page={page}
+            handlePage={handlePage}
+            limit={limit}
+            handleChangeSelect={handleChangeSelect}
+          />
         </Route>
+        {/* <Route path="./offers/:test">
+          {" "}
+          {isLoading ? (
+            <p>Downloading...</p>
+          ) : (
+            <Home data={data} page={page} handlePage={handlePage} />
+          )}
+        </Route> */}
         <Route path="/offer/:id">
           <OfferPage />
         </Route>
