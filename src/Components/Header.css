@@ -65,9 +65,16 @@ header {
 }
 
 .btn-send-clothes {
+  white-space: nowrap;
+}
+
+.btn-green {
+  border-radius: 0.5rem;
+  border: none;
+  height: 3rem;
+  font-size: 1.2rem;
   background-color: var(--main-green);
   color: white;
-  white-space: nowrap;
 }
 
 .btn-signUp {

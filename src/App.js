@@ -85,7 +85,7 @@ function App() {
           )}
         </Route> */}
         <Route path="/offer/:id">
-          <OfferPage />
+          <OfferPage data={data} />
         </Route>
       </Switch>
       <Footer />

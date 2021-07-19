@@ -23,7 +23,9 @@ const Header = () => {
           <button className="btn-logIn">Se connecter</button>
         </div>
         <div className="header-call2">
-          <button className="btn-send-clothes">Vends tes articles</button>
+          <button className="btn-send-clothes btn-green">
+            Vends tes articles
+          </button>
         </div>
       </div>
     </header>

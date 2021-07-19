@@ -23,16 +23,10 @@ const Product = ({ offer }) => {
       <div className="product-details">
         <p className="product-price">{currencyFormat(offer.product_price)}</p>
         <p className="product-size">
-          {offer.product_details.find((e) => e.hasOwnProperty("TAILLE"))
-            ? offer.product_details.find((e) => e.hasOwnProperty("TAILLE"))
-                .TAILLE
-            : ""}
+          {offer.product_details.find((e) => e.hasOwnProperty("TAILLE")).TAILLE}
         </p>
         <p className="product-brand">
-          {offer.product_details.find((e) => e.hasOwnProperty("MARQUE"))
-            ? offer.product_details.find((e) => e.hasOwnProperty("MARQUE"))
-                .MARQUE
-            : ""}
+          {offer.product_details.find((e) => e.hasOwnProperty("MARQUE")).MARQUE}
         </p>
       </div>
     </>
