@@ -2,11 +2,32 @@ import { useParams } from "react-router-dom";
 import "./OfferPage.css";
 import { currencyFormat } from "../helpers/helper";
 import avatar from "../assets/images/avatar.png";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-const OfferPage = ({ data }) => {
+const OfferPage = () => {
   const { id } = useParams();
-  const product = data.offers.find((e) => e._id === id);
-  return (
+  const [product, setProduct] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `https://vinted-api-remi.herokuapp.com/offer/${id}`
+        );
+        setProduct(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        alert("an error has occured");
+      }
+    };
+    fetchData();
+  }, [id]);
+
+  return isLoading ? (
+    <p>Downloading...</p>
+  ) : (
     <div className="offer-page">
       <div className="container-offer-page">
         <div className="image-product">
@@ -24,7 +45,7 @@ const OfferPage = ({ data }) => {
               </p>
               {product.product_details.find((e) => e.hasOwnProperty("MARQUE"))
                 .MARQUE !== "" ? (
-                <div className="div-label-produc-details">
+                <div className="div-label-product-details">
                   <p className="label-product-details">MARQUE</p>
                   <span className="value-product-details">
                     {
@@ -37,7 +58,7 @@ const OfferPage = ({ data }) => {
               ) : null}
               {product.product_details.find((e) => e.hasOwnProperty("TAILLE"))
                 .TAILLE !== "" ? (
-                <div className="div-label-produc-details">
+                <div className="div-label-product-details">
                   <p className="label-product-details">TAILLE</p>
                   <span className="value-product-details">
                     {
@@ -50,7 +71,7 @@ const OfferPage = ({ data }) => {
               ) : null}
               {product.product_details.find((e) => e.hasOwnProperty("ÉTAT"))
                 .ÉTAT !== "" ? (
-                <div className="div-label-produc-details">
+                <div className="div-label-product-details">
                   <p className="label-product-details">ÉTAT</p>
                   <span className="value-product-details">
                     {
@@ -63,7 +84,7 @@ const OfferPage = ({ data }) => {
               ) : null}
               {product.product_details.find((e) => e.hasOwnProperty("COULEUR"))
                 .COULEUR !== "" ? (
-                <div className="div-label-produc-details">
+                <div className="div-label-product-details">
                   <p className="label-product-details">COULEUR</p>
                   <span className="value-product-details">
                     {
@@ -77,7 +98,7 @@ const OfferPage = ({ data }) => {
               {product.product_details.find((e) =>
                 e.hasOwnProperty("EMPLACEMENT")
               ).EMPLACEMENT !== "" ? (
-                <div className="div-label-produc-details">
+                <div className="div-label-product-details">
                   <p className="label-product-details">EMPLACEMENT</p>
                   <span className="value-product-details">
                     {

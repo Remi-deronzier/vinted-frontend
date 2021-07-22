@@ -62,11 +62,15 @@
 
 .label-product-details {
   color: #999999;
-  width: 16rem;
+  width: 55%;
 }
 
-.div-label-produc-details {
+.div-label-product-details {
   display: flex;
+}
+
+.value-product-details {
+  width: 45%;
 }
 
 .value-product-details,
