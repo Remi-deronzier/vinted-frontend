@@ -71,3 +71,9 @@ h1 {
   height: 50rem;
   object-fit: cover;
 }
+
+/* MODAL */
+
+.signup-content {
+  margin-top: 8rem;
+}
