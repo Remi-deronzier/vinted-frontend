@@ -6,19 +6,22 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import * as qs from "qs";
 import Cookies from "js-cookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Home = () => {
+const Home = ({ limit, setLimit, showSignupModal, setShowSignupModal }) => {
   const location = useLocation();
   const params = qs.parse(location.search.slice(1));
-  const pageNumber = params.page;
+  console.log(params);
+  const pageNumber = params.page ? params.page : 1;
+  console.log(pageNumber);
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState([]);
-  const [limit, setLimit] = useState(5);
   // MOADAL
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isRevealedPwd, setIsRevealedPwd] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +45,10 @@ const Home = () => {
 
   const handleChangeSelect = (e) => {
     setLimit(e.target.value);
+  };
+
+  const handleRevealPwd = () => {
+    setIsRevealedPwd(!isRevealedPwd);
   };
 
   // MODAL
@@ -70,6 +77,7 @@ const Home = () => {
     setUsername("");
     setEmail("");
     setPassword("");
+    setShowSignupModal(false);
   };
 
   const handleUsername = (e) => {
@@ -88,34 +96,50 @@ const Home = () => {
     <p>Dowloading...</p>
   ) : (
     <>
-      <div className="modal-signup">
-        <div className="container">
+      {" "}
+      {showSignupModal && (
+        <div className="modal-signup">
           <div className="signup-content">
-            <form onSubmit={handleSubmit}>
+            <h2 className="h2-signup">S'inscrire</h2>
+            <form onSubmit={handleSubmit} className="form-signup">
               <input
+                className="input-signup"
                 type="text"
                 placeholder="Nom d'utilisateur"
                 value={username}
                 onChange={handleUsername}
+                required
               />
               <input
-                type="text"
+                className="input-signup"
+                type="email"
                 placeholder="Email"
                 value={email}
                 onChange={handleEmail}
+                required
               />
-              <input
-                type="text"
-                placeholder="Mot de passe"
-                value={password}
-                onChange={handlePassword}
-              />
-              <button type="submit">S'inscrire</button>
+              <div className="div-password">
+                <input
+                  className="input-signup"
+                  type={isRevealedPwd ? "text" : "password"}
+                  placeholder="Mot de passe"
+                  value={password}
+                  onChange={handlePassword}
+                  required
+                />
+                <FontAwesomeIcon
+                  icon="eye"
+                  className="icon-eye"
+                  onClick={handleRevealPwd}
+                />
+              </div>
+              <button type="submit" className="btn-signup btn-green">
+                S'inscrire
+              </button>
             </form>
           </div>
         </div>
-      </div>
-
+      )}
       <main>
         <img src={welcomImage} alt="femme heureuse" className="welcome-img" />
         <div className="container">

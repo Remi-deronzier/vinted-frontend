@@ -2,6 +2,7 @@
   --main-green: #09aeb7;
   --height--header: 5.2rem;
   --product-offset: 1rem;
+  --main-black: #111;
 }
 
 html {
@@ -24,4 +25,13 @@ button:hover {
 
 a {
   text-decoration: none;
+}
+
+.btn-green {
+  border-radius: 0.5rem;
+  border: none;
+  height: 3rem;
+  font-size: 1.2rem;
+  background-color: var(--main-green);
+  color: white;
 }

@@ -23,7 +23,7 @@
 
 .product-price {
   font-size: 1.4rem;
-  color: #111111;
+  color: var(--main-black);
   font-weight: bold;
 }
 
