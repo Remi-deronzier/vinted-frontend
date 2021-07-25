@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import "./OfferPage.css";
+import Loader from "../Components/Loader";
 import { currencyFormat } from "../helpers/helper";
 import avatar from "../assets/images/avatar.png";
 import { useState, useEffect } from "react";
@@ -26,7 +27,7 @@ const OfferPage = () => {
   }, [id]);
 
   return isLoading ? (
-    <p>Downloading...</p>
+    <Loader />
   ) : (
     <div className="offer-page">
       <div className="container-offer-page">

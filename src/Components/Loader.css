@@ -1,0 +1,56 @@
+.container-loader {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  width: 20rem;
+  height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-loader,
+.loader-content {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+}
+
+.back-loader {
+  border: solid #ebeaea 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-content {
+  border: solid var(--main-green) 1rem;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  flex-shrink: 0;
+  animation: rotation linear 1.5s infinite forwards;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(180deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-100deg);
+  }
+
+  100% {
+    transform: rotate(-180deg);
+  }
+}
