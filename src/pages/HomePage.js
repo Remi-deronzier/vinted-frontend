@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import * as qs from "qs";
 
-const Home = ({ limit, setLimit, showSignupModal, setShowSignupModal }) => {
+const Home = ({ limit, setLimit }) => {
   const location = useLocation();
   const params = qs.parse(location.search.slice(1));
   const pageNumber = params.page ? params.page : 1;
@@ -44,7 +44,16 @@ const Home = ({ limit, setLimit, showSignupModal, setShowSignupModal }) => {
   ) : (
     <>
       <main>
-        <img src={welcomImage} alt="femme heureuse" className="welcome-img" />
+        <div className="carousel-presentation">
+          <img src={welcomImage} alt="femme heureuse" className="welcome-img" />
+          <div className="call-to-action-send">
+            <p className="ready-to-sort-out">
+              Prêts à faire du tri dans vos placards ?
+            </p>
+            <button className="btn-green btn-sort-out">Vends maintenant</button>
+            <p className="discover-running">Découvrir comment ça marche</p>
+          </div>
+        </div>
         <div className="container">
           <div className="filter">
             <h1>Fil d'actu</h1>

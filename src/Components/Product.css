@@ -25,7 +25,7 @@
 .product-price {
   font-size: 1.4rem;
   color: var(--main-black);
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .product-details {

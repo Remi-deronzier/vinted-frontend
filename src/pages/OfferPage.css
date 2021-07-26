@@ -47,7 +47,7 @@
 
 .price-product {
   font-size: 2.4rem;
-  font-weight: bold;
+  font-weight: 500;
   color: var(--main-black);
   margin-bottom: 2rem;
 }
@@ -55,7 +55,7 @@
 .label-product-details,
 .value-product-details {
   font-size: 1.3rem;
-  font-weight: bold;
+  font-weight: 500;
   line-height: 2rem;
   text-transform: uppercase;
 }
@@ -80,7 +80,7 @@
 
 .title-product {
   font-size: 2.2rem;
-  font-weight: bold;
+  font-weight: 500;
   margin-bottom: 2rem;
 }
 
@@ -106,5 +106,5 @@
 .avatar-username {
   color: var(--main-black);
   font-size: 1.6rem;
-  font-weight: bold;
+  font-weight: 500;
 }

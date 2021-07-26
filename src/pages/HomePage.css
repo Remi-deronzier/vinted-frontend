@@ -4,6 +4,40 @@
   margin-top: 3rem;
 }
 
+.carousel-presentation {
+  position: relative;
+}
+
+.call-to-action-send {
+  position: absolute;
+  top: calc(var(--height--header) + 7rem);
+  left: 12%;
+  background-color: #fff;
+  width: 40rem;
+  border-radius: 0.5rem;
+  padding: 4rem;
+  box-sizing: border-box;
+  height: 26rem;
+}
+
+.ready-to-sort-out {
+  font-size: 3.4rem;
+  font-weight: 500;
+  color: var(--main-black);
+}
+
+.btn-sort-out {
+  font-size: 1.6rem;
+  padding: 1rem 2rem;
+  height: auto;
+  margin: 4rem 0 2rem 0;
+}
+
+.discover-running {
+  font-size: 1.4rem;
+  color: var(--main-green);
+}
+
 .filter {
   display: flex;
   align-items: center;
@@ -13,7 +47,7 @@
 h1 {
   font-size: 2.4rem;
   color: var(--main-black);
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .label-page-nb-display {
@@ -22,7 +56,7 @@ h1 {
   align-items: center;
   margin-left: 4rem;
   color: var(--main-green);
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .select-page-nb-display {
