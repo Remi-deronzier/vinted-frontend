@@ -8,7 +8,9 @@ const Product = ({ offer }) => {
       <div className="owner-details">
         <img
           src={
-            offer.owner.account.avatar ? offer.owner.account.avatar.url : avatar
+            offer.owner.account.avatar
+              ? offer.owner.account.avatar.secure_url
+              : avatar
           }
           alt={offer.owner.account.username}
           className="avatar"
@@ -16,7 +18,7 @@ const Product = ({ offer }) => {
         <span className="owner-username">{offer.owner.account.username}</span>
       </div>
       <img
-        src={offer.product_image[0].url}
+        src={offer.product_image[0].secure_url}
         alt={offer.product_name}
         className="product-image"
       />

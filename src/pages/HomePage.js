@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import Product from "../Components/Product";
 import "./HomePage.css";
 import Loader from "../Components/Loader";
-import welcomImage from "../assets/images/welcome-image.jpg";
+import welcomeImage from "../assets/images/welcome-image-crop.png";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import * as qs from "qs";
@@ -18,6 +18,7 @@ const Home = ({ limit, setLimit }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const response = await axios.get(
           `https://vinted-api-remi.herokuapp.com/offers?page=${pageNumber}&limit=${limit}`
         );
@@ -28,6 +29,7 @@ const Home = ({ limit, setLimit }) => {
           .fill(0)
           .map((element, index) => index + 1);
         setPage(arrayPage);
+        document.title = "Vinted | La boutique de Rémi";
       } catch (error) {
         alert("an error has occured");
       }
@@ -45,7 +47,11 @@ const Home = ({ limit, setLimit }) => {
     <>
       <main>
         <div className="carousel-presentation">
-          <img src={welcomImage} alt="femme heureuse" className="welcome-img" />
+          <img
+            src={welcomeImage}
+            alt="femme heureuse"
+            className="welcome-img"
+          />
           <div className="call-to-action-send">
             <p className="ready-to-sort-out">
               Prêts à faire du tri dans vos placards ?
@@ -59,7 +65,7 @@ const Home = ({ limit, setLimit }) => {
             <h1>Fil d'actu</h1>
             <label className="label-page-nb-display">
               Nombre de résultats à afficher :
-              <Link to={`/?page=${pageNumber}&limit=${limit}`}>
+              <Link to={`/?page=${pageNumber}`}>
                 <select
                   value={limit}
                   onChange={handleChangeSelect}
@@ -89,7 +95,7 @@ const Home = ({ limit, setLimit }) => {
             return (
               <Link
                 key={index}
-                to={`/?page=${index + 1}&limit=${limit}`}
+                to={`/?page=${index + 1}`}
                 className="page-number"
               >
                 <li>{element}</li>

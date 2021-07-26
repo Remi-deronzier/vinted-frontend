@@ -12,7 +12,12 @@
 }
 
 .detail-main-content {
+  height: 80%;
+}
+
+.image-product {
   height: 100%;
+  width: 60%;
 }
 
 .detail-product {
@@ -20,24 +25,13 @@
   padding: 4rem 3rem;
   box-sizing: border-box;
   width: 35%;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.image-product {
-  height: 100%;
-  width: 50%;
-}
-
-.img-product-offerPage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .detail-call1 {
-  height: 40%;
   border-bottom: 0.1rem solid #dddcdc;
 }
 
@@ -85,14 +79,61 @@
 }
 
 .description-product {
+  overflow: hidden;
+}
+
+/* ELLIPSIS TEXT */
+
+.fade {
   font-size: 1.6rem;
   line-height: 2.2rem;
+  position: relative;
+  height: 13.2rem;
+}
+
+.fade:after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80%;
+  height: 2.2rem;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1) 50%
+  );
+}
+
+/* Tooltip container */
+/* .tooltip {
+  position: relative;
+  display: inline-block;
+} */
+
+/* Tooltip text */
+.tooltiptext {
+  visibility: hidden;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  /* padding: 5px 0; */
+  border-radius: 6px;
+  position: absolute;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 
 .avatar-description {
   display: flex;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .avatar-image {
@@ -107,4 +148,20 @@
   color: var(--main-black);
   font-size: 1.6rem;
   font-weight: 500;
+}
+
+/* CAROUSEL */
+
+.carousel-container-image {
+  height: 100%;
+}
+
+.img-product-offerPage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.react-multiple-carousel__arrow {
+  z-index: 2 !important;
 }

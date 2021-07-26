@@ -9,8 +9,6 @@
 }
 
 .loader {
-  width: 20rem;
-  height: 20rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,20 +16,20 @@
 
 .back-loader,
 .loader-content {
-  width: 10rem;
-  height: 10rem;
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
 }
 
 .back-loader {
-  border: solid #ebeaea 1rem;
+  border: solid #ebeaea 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .loader-content {
-  border: solid var(--main-green) 1rem;
+  border: solid var(--main-green) 0.5rem;
   border-top-color: transparent;
   border-left-color: transparent;
   border-right-color: transparent;

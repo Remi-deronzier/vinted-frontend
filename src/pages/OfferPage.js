@@ -5,6 +5,8 @@ import { currencyFormat } from "../helpers/helper";
 import avatar from "../assets/images/avatar.png";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const OfferPage = () => {
   const { id } = useParams();
@@ -19,6 +21,7 @@ const OfferPage = () => {
         );
         setProduct(response.data);
         setIsLoading(false);
+        document.title = response.data.product_name;
       } catch (error) {
         alert("an error has occured");
       }
@@ -26,17 +29,50 @@ const OfferPage = () => {
     fetchData();
   }, [id]);
 
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+  };
+
   return isLoading ? (
     <Loader />
   ) : (
     <div className="offer-page">
       <div className="container-offer-page">
         <div className="image-product">
-          <img
-            src={product.product_image[0].url}
-            alt={product.product_name}
-            className="img-product-offerPage"
-          />
+          <Carousel
+            showDots={true}
+            responsive={responsive}
+            keyBoardControl={true}
+            containerClass="carousel-container-image"
+            removeArrowOnDeviceType={["tablet", "mobile"]}
+            dotListClass="custom-dot-list-style"
+            itemClass="carousel-item"
+          >
+            {product.product_image.map((image, index) => {
+              return (
+                <img
+                  src={image.secure_url}
+                  alt={product.product_name}
+                  className="img-product-offerPage"
+                  key={index}
+                />
+              );
+            })}
+          </Carousel>
         </div>
         <div className="detail-product">
           <div className="detail-main-content">
@@ -113,15 +149,25 @@ const OfferPage = () => {
             </div>
             <div className="detail-call2">
               <p className="title-product">{product.product_name}</p>
-              <p className="description-product">
-                {product.product_description}
-              </p>
+              <div className="fade description-product">
+                <p>{product.product_description}</p>
+                <p className="tooltiptext">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Accusamus doloribus esse blanditiis nesciunt, tempore et hic
+                  libero quibusdam explicabo quo, error voluptates. Hic, optio
+                  corrupti. Natus temporibus voluptatem veritatis et! Lorem,
+                  ipsum dolor sit amet consectetur adipisicing elit. Optio, ab
+                  perspiciatis neque incidunt possimus eaque ut delectus
+                  praesentium. Perspiciatis, vitae labore ratione unde commodi
+                  neque assumenda asperiores praesentium explicabo quo.
+                </p>
+              </div>
               <div className="avatar-description">
                 <img
                   className="avatar-image"
                   src={
                     product.owner.account.avatar
-                      ? product.owner.account.avatar.url
+                      ? product.owner.account.avatar.secure_url
                       : avatar
                   }
                   alt={product.owner.account.username}
