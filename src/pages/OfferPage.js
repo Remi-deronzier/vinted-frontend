@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import fillImage from "../assets/images/icon-clothes.png";
 
 const OfferPage = () => {
   const { id } = useParams();
@@ -21,7 +22,7 @@ const OfferPage = () => {
         );
         setProduct(response.data);
         setIsLoading(false);
-        document.title = response.data.product_name;
+        document.title = `${response.data.product_name} - Vinted`;
       } catch (error) {
         alert("an error has occured");
       }
@@ -62,16 +63,24 @@ const OfferPage = () => {
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item"
           >
-            {product.product_image.map((image, index) => {
-              return (
-                <img
-                  src={image.secure_url}
-                  alt={product.product_name}
-                  className="img-product-offerPage"
-                  key={index}
-                />
-              );
-            })}
+            {product.product_image ? (
+              product.product_image.map((image, index) => {
+                return (
+                  <img
+                    src={image.secure_url}
+                    alt={product.product_name}
+                    className="img-product-offerPage"
+                    key={index}
+                  />
+                );
+              })
+            ) : (
+              <img
+                src={fillImage}
+                alt="icon representing clothes"
+                className="img-product-offerPage"
+              />
+            )}
           </Carousel>
         </div>
         <div className="detail-product">
@@ -80,8 +89,9 @@ const OfferPage = () => {
               <p className="price-product">
                 {currencyFormat(product.product_price)}
               </p>
-              {product.product_details.find((e) => e.hasOwnProperty("MARQUE"))
-                .MARQUE !== "" ? (
+              {product.product_details.find((e) =>
+                e.hasOwnProperty("MARQUE")
+              ) ? (
                 <div className="div-label-product-details">
                   <p className="label-product-details">MARQUE</p>
                   <span className="value-product-details">
@@ -93,8 +103,9 @@ const OfferPage = () => {
                   </span>
                 </div>
               ) : null}
-              {product.product_details.find((e) => e.hasOwnProperty("TAILLE"))
-                .TAILLE !== "" ? (
+              {product.product_details.find((e) =>
+                e.hasOwnProperty("TAILLE")
+              ) ? (
                 <div className="div-label-product-details">
                   <p className="label-product-details">TAILLE</p>
                   <span className="value-product-details">
@@ -106,8 +117,7 @@ const OfferPage = () => {
                   </span>
                 </div>
               ) : null}
-              {product.product_details.find((e) => e.hasOwnProperty("ÉTAT"))
-                .ÉTAT !== "" ? (
+              {product.product_details.find((e) => e.hasOwnProperty("ÉTAT")) ? (
                 <div className="div-label-product-details">
                   <p className="label-product-details">ÉTAT</p>
                   <span className="value-product-details">
@@ -119,8 +129,9 @@ const OfferPage = () => {
                   </span>
                 </div>
               ) : null}
-              {product.product_details.find((e) => e.hasOwnProperty("COULEUR"))
-                .COULEUR !== "" ? (
+              {product.product_details.find((e) =>
+                e.hasOwnProperty("COULEUR")
+              ) ? (
                 <div className="div-label-product-details">
                   <p className="label-product-details">COULEUR</p>
                   <span className="value-product-details">
@@ -134,7 +145,7 @@ const OfferPage = () => {
               ) : null}
               {product.product_details.find((e) =>
                 e.hasOwnProperty("EMPLACEMENT")
-              ).EMPLACEMENT !== "" ? (
+              ) ? (
                 <div className="div-label-product-details">
                   <p className="label-product-details">EMPLACEMENT</p>
                   <span className="value-product-details">

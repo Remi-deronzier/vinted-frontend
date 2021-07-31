@@ -1,5 +1,5 @@
 .offer-page {
-  background-color: #ebedee;
+  background-color: var(--grey-background);
 }
 
 .container-offer-page {
@@ -32,7 +32,7 @@
 }
 
 .detail-call1 {
-  border-bottom: 0.1rem solid #dddcdc;
+  border-bottom: var(--width-border-bottom) solid var(--grey-border-bottom);
 }
 
 .detail-call2 {

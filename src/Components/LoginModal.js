@@ -3,6 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SignupLoginModal.css";
+import { useHistory } from "react-router-dom";
 
 const LoginModal = ({
   setShowLoginModal,
@@ -12,6 +13,8 @@ const LoginModal = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isRevealedPwd, setIsRevealedPwd] = useState(false);
+
+  let history = useHistory();
 
   // Prevent scrolling when the modal is activated
   // Enable again scrolling when the modal is desactivated
@@ -41,6 +44,7 @@ const LoginModal = ({
       setShowLoginModal(false);
       setShowSignupModal(false);
       setIsConnected(Cookies.get("token"));
+      history.push("/publish");
     } catch (error) {
       alert(error.message);
     }
@@ -76,7 +80,7 @@ const LoginModal = ({
         <h2 className="h2-signup-login">Se connecter</h2>
         <form onSubmit={handleSubmit} className="form-signup-login">
           <input
-            className="input-signup-login"
+            className="input-signup-login input"
             type="email"
             placeholder="Email"
             value={email}
@@ -85,7 +89,7 @@ const LoginModal = ({
           />
           <div className="div-password">
             <input
-              className="input-signup-login"
+              className="input-signup-login input"
               type={isRevealedPwd ? "text" : "password"}
               placeholder="Mot de passe"
               value={password}

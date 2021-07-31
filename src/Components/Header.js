@@ -4,6 +4,7 @@ import "./Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
 import avatar from "../assets/images/avatar.png";
+import { useHistory } from "react-router-dom";
 
 const Header = ({
   setShowSignupModal,
@@ -11,6 +12,8 @@ const Header = ({
   isConnected,
   setIsConnected,
 }) => {
+  let history = useHistory();
+
   const handleSignupModalTrue = () => {
     setShowSignupModal(true);
     setShowLoginModal(false);
@@ -27,6 +30,7 @@ const Header = ({
     Cookies.remove("token");
     Cookies.remove("avatar");
     setIsConnected("");
+    history.push("/");
   };
 
   return (
@@ -46,10 +50,16 @@ const Header = ({
           </div>
           {!isConnected ? (
             <div className="signup-login-div-header">
-              <button className="btn-signUp" onClick={handleSignupModalTrue}>
+              <button
+                className="btn-signUp btn-white-border-green"
+                onClick={handleSignupModalTrue}
+              >
                 S'inscrire
               </button>
-              <button className="btn-logIn" onClick={handleLoginModalTrue}>
+              <button
+                className="btn-logIn btn-white-border-green"
+                onClick={handleLoginModalTrue}
+              >
                 Se connecter
               </button>
             </div>
@@ -67,9 +77,14 @@ const Header = ({
           )}
         </div>
         <div className="header-call2">
-          <button className="btn-send-clothes btn-green">
-            Vends tes articles
-          </button>
+          <Link to={isConnected && "/publish"}>
+            <button
+              className="btn-send-clothes btn-green"
+              onClick={!isConnected ? handleLoginModalTrue : undefined}
+            >
+              Vends tes articles
+            </button>
+          </Link>
         </div>
       </div>
     </header>

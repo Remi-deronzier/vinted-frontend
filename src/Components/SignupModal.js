@@ -68,7 +68,7 @@ const SignupModal = ({ setShowSignupModal, setShowLoginModal }) => {
         <h2 className="h2-signup-login">S'inscrire</h2>
         <form onSubmit={handleSubmit} className="form-signup-login">
           <input
-            className="input-signup-login"
+            className="input-signup-login input"
             type="text"
             placeholder="Nom d'utilisateur"
             value={username}
@@ -76,7 +76,7 @@ const SignupModal = ({ setShowSignupModal, setShowLoginModal }) => {
             required
           />
           <input
-            className="input-signup-login"
+            className="input-signup-login input"
             type="email"
             placeholder="Email"
             value={email}
@@ -85,7 +85,7 @@ const SignupModal = ({ setShowSignupModal, setShowLoginModal }) => {
           />
           <div className="div-password">
             <input
-              className="input-signup-login"
+              className="input-signup-login input"
               type={isRevealedPwd ? "text" : "password"}
               placeholder="Mot de passe"
               value={password}

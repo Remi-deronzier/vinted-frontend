@@ -1,8 +1,13 @@
+/* GENERAL SETTINGS */
+
 :root {
   --main-green: #09aeb7;
   --height--header: 5.2rem;
   --product-offset: 1rem;
   --main-black: #111;
+  --grey-border-bottom: #ece9e9;
+  --width-border-bottom: 0.1rem;
+  --grey-background: #ebedee;
 }
 
 html {
@@ -19,12 +24,10 @@ body {
   width: 1240px;
 }
 
+/* BUTTONS */
+
 button:hover {
   cursor: pointer;
-}
-
-a {
-  text-decoration: none;
 }
 
 .btn-green {
@@ -34,4 +37,34 @@ a {
   font-size: 1.2rem;
   background-color: var(--main-green);
   color: white;
+}
+
+.btn-white-border-green {
+  border-radius: 0.5rem;
+  background-color: #fff;
+  height: 3rem;
+  color: var(--main-green);
+  border: solid 0.1rem var(--main-green);
+  font-size: 1.2rem;
+}
+
+/* INPUTS */
+
+.input:focus {
+  border-bottom: 1px solid var(--main-green);
+}
+
+.input {
+  width: 30rem;
+  font-family: "Maison Neue";
+  font-size: 1.6rem;
+  border: none;
+  border-bottom: 1px solid #dbdada;
+  outline: none;
+}
+
+/* LINKS */
+
+a {
+  text-decoration: none;
 }

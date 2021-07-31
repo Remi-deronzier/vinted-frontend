@@ -4,7 +4,7 @@
 
 header {
   height: var(--height--header);
-  border-bottom: solid 0.1rem #ece9e9;
+  border-bottom: solid var(--width-border-bottom) var(--grey-border-bottom);
   position: fixed;
   width: 100%;
   top: 0;
@@ -50,17 +50,6 @@ header {
   top: 50%;
   transform: translateY(-50%);
   color: #a8a8a8;
-}
-
-.btn-signUp,
-.btn-logIn {
-  border-radius: 0.5rem;
-  border: none;
-  background-color: #fff;
-  height: 3rem;
-  color: var(--main-green);
-  border: solid 0.1rem var(--main-green);
-  font-size: 1.2rem;
 }
 
 .btn-send-clothes {

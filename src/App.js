@@ -7,6 +7,7 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import SignupModal from "./Components/SignupModal";
 import LoginModal from "./Components/LoginModal";
+import PublishPage from "./pages/PublishPage";
 import { useState } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faSearch, faEye } from "@fortawesome/free-solid-svg-icons";
@@ -18,8 +19,6 @@ function App() {
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isConnected, setIsConnected] = useState(Cookies.get("token") || "");
-
-  console.log(isConnected);
 
   return (
     <Router>
@@ -53,6 +52,9 @@ function App() {
         </Route>
         <Route path="/offer/:id">
           <OfferPage />
+        </Route>
+        <Route path="/publish">
+          <PublishPage isConnected={isConnected} />
         </Route>
       </Switch>
       <Footer />

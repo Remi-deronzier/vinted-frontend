@@ -24,21 +24,8 @@
   align-items: center;
 }
 
-.input-signup-login {
-  width: 30rem;
-  font-family: "Maison Neue";
-  font-size: 1.8rem;
-  border: none;
-  border-bottom: 1px solid #dbdada;
-  outline: none;
-}
-
 .input-signup-login:not(:last-child) {
   margin-bottom: 3.5rem;
-}
-
-.input-signup-login:focus {
-  border-bottom: 1px solid var(--main-green);
 }
 
 .div-password {
