@@ -10,9 +10,13 @@ import LoginModal from "./Components/LoginModal";
 import PublishPage from "./pages/PublishPage";
 import { useState } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSearch, faEye } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSearch,
+  faEye,
+  faWindowClose,
+} from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
-library.add(faSearch, faEye);
+library.add(faSearch, faEye, faWindowClose);
 
 function App() {
   const [limit, setLimit] = useState(5);

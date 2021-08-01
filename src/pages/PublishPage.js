@@ -1,8 +1,9 @@
 import "./PublishPage.css";
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const PublishPage = ({ isConnected }) => {
   const [title, setTitle] = useState("");
@@ -37,7 +38,16 @@ const PublishPage = ({ isConnected }) => {
     formData.append("size", size);
     formData.append("color", color);
     try {
-      await axios.post(
+      // Disable the submit button
+      document
+        .querySelector("#submit-btn")
+        .setAttribute("disabled", "disabled");
+      // Launch the loader
+      document
+        .querySelector(".loader-circle")
+        .classList.remove("loader-circle-hidden");
+      // axios
+      const response = await axios.post(
         "https://vinted-api-remi.herokuapp.com/offer/publish",
         formData,
         {
@@ -47,7 +57,13 @@ const PublishPage = ({ isConnected }) => {
           },
         }
       );
-      history.push("/");
+      // Enable the button after the request
+      document.querySelector("#submit-btn").removeAttribute("disabled");
+      // Stop the loader
+      document
+        .querySelector(".loader-circle")
+        .classList.add("loader-circle-hidden");
+      history.push(`/offer/${response.data._id}`);
     } catch (error) {
       alert("an error has occured");
     }
@@ -121,7 +137,7 @@ const PublishPage = ({ isConnected }) => {
     setFiles(newFilesDeleted);
   };
 
-  return (
+  return isConnected ? (
     <div className="publish-page">
       <div className="container">
         <h1 className="publish-page-h1">Vends ton article</h1>
@@ -142,12 +158,11 @@ const PublishPage = ({ isConnected }) => {
                   return (
                     <div key={index}>
                       <img src={url} alt={files[index].name} />
-                      <p
-                        className="x-delete-picture"
+                      <FontAwesomeIcon
+                        icon="window-close"
+                        className="icon-delete-picture"
                         onClick={() => handleDeletePicture(index)}
-                      >
-                        x
-                      </p>
+                      />
                     </div>
                   );
                 })}
@@ -267,7 +282,7 @@ const PublishPage = ({ isConnected }) => {
               Prix
             </label>
             <input
-              type="text"
+              type="number"
               placeholder="Ex : 8,00 €"
               id="price"
               value={price}
@@ -277,13 +292,24 @@ const PublishPage = ({ isConnected }) => {
             />
           </div>
           <div className="div-btn-add-publish">
-            <button type="submit" className="btn-green btn-add-publish">
+            <button
+              type="submit"
+              className="btn-green btn-add-publish"
+              id="submit-btn"
+            >
               Ajouter
+              <div className="loader-circle loader-circle-hidden">
+                <div className="circle-loader circle-1"></div>
+                <div className="circle-loader circle-2"></div>
+                <div className="circle-loader circle-3"></div>
+              </div>
             </button>
           </div>
         </form>
       </div>
     </div>
+  ) : (
+    <Redirect to="/" />
   );
 };
 

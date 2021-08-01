@@ -83,7 +83,7 @@ const Home = ({
             <h1>Fil d'actu</h1>
             <label className="label-page-nb-display">
               Nombre de résultats à afficher :
-              <Link to={`/?page=${pageNumber}`}>
+              <Link to={location.search && `/?page=${pageNumber}`}>
                 <select
                   value={limit}
                   onChange={handleChangeSelect}
