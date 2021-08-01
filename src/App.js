@@ -2,7 +2,7 @@ import "./App.css";
 import "./assets/css/fonts.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import OfferPage from "./pages/OfferPage";
-import Home from "./pages/HomePage";
+import HomePage from "./pages/HomePage";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import SignupModal from "./Components/SignupModal";
@@ -43,11 +43,12 @@ function App() {
       )}
       <Switch>
         <Route exact path="/">
-          <Home
+          <HomePage
             limit={limit}
             setLimit={setLimit}
-            showSignupModal={showSignupModal}
             setShowSignupModal={setShowSignupModal}
+            setShowLoginModal={setShowLoginModal}
+            isConnected={isConnected}
           />
         </Route>
         <Route path="/offer/:id">

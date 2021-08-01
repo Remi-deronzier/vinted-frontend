@@ -7,7 +7,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import * as qs from "qs";
 
-const Home = ({ limit, setLimit }) => {
+const Home = ({
+  limit,
+  setLimit,
+  setShowLoginModal,
+  setShowSignupModal,
+  isConnected,
+}) => {
   const location = useLocation();
   const params = qs.parse(location.search.slice(1));
   const pageNumber = params.page ? params.page : 1;
@@ -41,6 +47,11 @@ const Home = ({ limit, setLimit }) => {
     setLimit(e.target.value);
   };
 
+  const handleLoginModalTrue = () => {
+    setShowLoginModal(true);
+    setShowSignupModal(false);
+  };
+
   return isLoading ? (
     <Loader />
   ) : (
@@ -56,7 +67,14 @@ const Home = ({ limit, setLimit }) => {
             <p className="ready-to-sort-out">
               Prêts à faire du tri dans vos placards ?
             </p>
-            <button className="btn-green btn-sort-out">Vends maintenant</button>
+            <Link to="/publish">
+              <button
+                className="btn-green btn-sort-out"
+                onClick={!isConnected ? handleLoginModalTrue : undefined}
+              >
+                Vends maintenant
+              </button>
+            </Link>
             <p className="discover-running">Découvrir comment ça marche</p>
           </div>
         </div>

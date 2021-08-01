@@ -82,15 +82,31 @@ aside {
   align-items: center;
 }
 
-aside img {
+aside div {
   width: 20rem;
   height: 20rem;
-  object-fit: cover;
-  border-radius: 0.5rem;
+  position: relative;
 }
 
-aside img:not(:last-child) {
+.x-delete-picture {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.x-delete-picture:hover {
+  cursor: pointer;
+}
+
+aside div:not(:last-child) {
   margin-right: 1rem;
+}
+
+aside div img {
+  object-fit: cover;
+  border-radius: 0.5rem;
+  width: 100%;
+  height: 100%;
 }
 
 .dropzone-no-pictures {

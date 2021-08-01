@@ -25,12 +25,9 @@ const PublishPage = ({ isConnected }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    const objFiles = files.reduce((obj, file, index) => {
-      obj[`picture${index + 1}`] = file;
-      return obj;
-    }, {});
-    console.log(objFiles);
-    formData.append("file", { ...files });
+    files.forEach((file, index) => {
+      formData.append(`picture${index + 1}`, file);
+    });
     formData.append("title", title);
     formData.append("description", description);
     formData.append("price", price);
@@ -39,7 +36,6 @@ const PublishPage = ({ isConnected }) => {
     formData.append("brand", brand);
     formData.append("size", size);
     formData.append("color", color);
-    console.log(formData);
     try {
       await axios.post(
         "https://vinted-api-remi.herokuapp.com/offer/publish",
@@ -59,12 +55,12 @@ const PublishPage = ({ isConnected }) => {
 
   const onDrop = useCallback(
     (acceptedFiles) => {
-      const newFiles = [...files, acceptedFiles];
+      const newFiles = [...files, ...acceptedFiles];
       setFiles(newFiles);
       const currentPreview = acceptedFiles.map((file) =>
         URL.createObjectURL(file)
       );
-      const newPreview = [...preview, currentPreview];
+      const newPreview = [...preview, ...currentPreview];
       setPreview(newPreview);
     },
     [files, preview]
@@ -74,6 +70,7 @@ const PublishPage = ({ isConnected }) => {
     {
       onDrop,
       disabled: files.length > 4,
+      maxFiles: 5 - files.length,
       accept: "image/jpeg, image/png",
     },
     [files]
@@ -111,6 +108,19 @@ const PublishPage = ({ isConnected }) => {
     setCity(e.target.value);
   };
 
+  const handleDeletePicture = (index) => {
+    const newFiles = [...files];
+    const newFilesDeleted = newFiles
+      .slice(0, index)
+      .concat(newFiles.slice(index + 1));
+    const newPreview = [...preview];
+    const newFPreviewDeleted = newPreview
+      .slice(0, index)
+      .concat(newPreview.slice(index + 1));
+    setPreview(newFPreviewDeleted);
+    setFiles(newFilesDeleted);
+  };
+
   return (
     <div className="publish-page">
       <div className="container">
@@ -129,7 +139,17 @@ const PublishPage = ({ isConnected }) => {
               <input {...getInputProps()} />{" "}
               <aside>
                 {preview.map((url, index) => {
-                  return <img src={url} alt={files[index].name} key={index} />;
+                  return (
+                    <div key={index}>
+                      <img src={url} alt={files[index].name} />
+                      <p
+                        className="x-delete-picture"
+                        onClick={() => handleDeletePicture(index)}
+                      >
+                        x
+                      </p>
+                    </div>
+                  );
                 })}
               </aside>
               {files.length <= 4 && (
