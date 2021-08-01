@@ -1,6 +1,7 @@
 import "./App.css";
 import "./assets/css/fonts.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useDebounce } from "use-debounce";
 import OfferPage from "./pages/OfferPage";
 import HomePage from "./pages/HomePage";
 import Header from "./Components/Header";
@@ -23,6 +24,13 @@ function App() {
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isConnected, setIsConnected] = useState(Cookies.get("token") || "");
+  const [search, setSearch] = useState("");
+  const [debouncedSearch] = useDebounce(search, 1000);
+  const [rangeValues, setRangeValues] = useState([0, 300]);
+  const [finalRangeValues, setFinalRangeValues] = useState([0, 300]);
+  const [debouncedFinalRangeValues] = useDebounce(finalRangeValues, 500);
+  const [sort, setSort] = useState(false);
+  const [debouncedSort] = useDebounce(sort, 500);
 
   return (
     <Router>
@@ -31,6 +39,13 @@ function App() {
         setShowLoginModal={setShowLoginModal}
         isConnected={isConnected}
         setIsConnected={setIsConnected}
+        search={search}
+        setSearch={setSearch}
+        setRangeValues={setRangeValues}
+        rangeValues={rangeValues}
+        setFinalRangeValues={setFinalRangeValues}
+        sort={sort}
+        setSort={setSort}
       />
       {showSignupModal && (
         <SignupModal
@@ -53,6 +68,9 @@ function App() {
             setShowSignupModal={setShowSignupModal}
             setShowLoginModal={setShowLoginModal}
             isConnected={isConnected}
+            debouncedSearch={debouncedSearch}
+            rangeValues={debouncedFinalRangeValues}
+            sort={debouncedSort}
           />
         </Route>
         <Route path="/offer/:id">

@@ -13,6 +13,9 @@ const Home = ({
   setShowLoginModal,
   setShowSignupModal,
   isConnected,
+  debouncedSearch,
+  sort,
+  rangeValues,
 }) => {
   const location = useLocation();
   const params = qs.parse(location.search.slice(1));
@@ -21,12 +24,22 @@ const Home = ({
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState([]);
 
+  console.log(pageNumber, debouncedSearch, rangeValues, sort);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
+        const queryParams = qs.stringify({
+          page: pageNumber,
+          title: debouncedSearch,
+          priceMin: rangeValues[0],
+          priceMax: rangeValues[1],
+          sort: !sort ? "price-asc" : "price-desc",
+          limit: limit,
+        });
         const response = await axios.get(
-          `https://vinted-api-remi.herokuapp.com/offers?page=${pageNumber}&limit=${limit}`
+          `https://vinted-api-remi.herokuapp.com/offers?${queryParams}`
         );
         setData(response.data);
         setIsLoading(false);
@@ -41,7 +54,7 @@ const Home = ({
       }
     };
     fetchData();
-  }, [pageNumber, limit]);
+  }, [pageNumber, limit, debouncedSearch, sort, rangeValues]);
 
   const handleChangeSelect = (e) => {
     setLimit(e.target.value);
