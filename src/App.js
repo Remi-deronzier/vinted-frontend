@@ -51,6 +51,7 @@ function App() {
         <SignupModal
           setShowSignupModal={setShowSignupModal}
           setShowLoginModal={setShowLoginModal}
+          setIsConnected={setIsConnected}
         />
       )}
       {showLoginModal && (

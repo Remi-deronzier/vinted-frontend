@@ -121,7 +121,7 @@ const Header = ({
                   id="toggle"
                   onChange={handleSort}
                 />
-                <label className="lb-filter-price" for="toggle"></label>
+                <label className="lb-filter-price" htmlFor="toggle"></label>
               </div>
             </div>
           </div>

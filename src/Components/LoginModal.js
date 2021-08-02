@@ -106,7 +106,7 @@ const LoginModal = ({
             Se connecter
           </button>
         </form>
-        <p className="signup-via-login" onClick={handleRedirectToSignup}>
+        <p className="toggle-signup-loggin" onClick={handleRedirectToSignup}>
           Pas encore de compte ? Inscris-toi !
         </p>
       </div>

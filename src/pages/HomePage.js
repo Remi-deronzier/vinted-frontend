@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import Product from "../Components/Product";
 import "./HomePage.css";
 import Loader from "../Components/Loader";
@@ -23,15 +23,16 @@ const Home = ({
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState([]);
+  const [numberOfOffers, setNumberOfOffers] = useState(0);
 
-  console.log(pageNumber, debouncedSearch, rangeValues, sort);
+  let history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
         const queryParams = qs.stringify({
-          page: pageNumber,
+          page: debouncedSearch ? 1 : pageNumber, // manage event : a user make a research but is on a page higher than 1, thus no results would be displayes which is annoying
           title: debouncedSearch,
           priceMin: rangeValues[0],
           priceMax: rangeValues[1],
@@ -48,6 +49,7 @@ const Home = ({
           .fill(0)
           .map((element, index) => index + 1);
         setPage(arrayPage);
+        setNumberOfOffers(response.data.count);
         document.title = "Vinted | La boutique de Rémi";
       } catch (error) {
         alert("an error has occured");
@@ -58,6 +60,10 @@ const Home = ({
 
   const handleChangeSelect = (e) => {
     setLimit(e.target.value);
+    const maxPage = Math.ceil(numberOfOffers / e.target.value);
+    history.push(
+      pageNumber <= maxPage ? `/?page=${pageNumber}` : `/?page=${maxPage}`
+    ); // manage the fact that when a user wants to display a high limit but is on a big page number, something is displayed instead of a blank page
   };
 
   const handleLoginModalTrue = () => {
@@ -96,30 +102,32 @@ const Home = ({
             <h1>Fil d'actu</h1>
             <label className="label-page-nb-display">
               Nombre de résultats à afficher :
-              <Link to={location.search && `/?page=${pageNumber}`}>
-                <select
-                  value={limit}
-                  onChange={handleChangeSelect}
-                  className="select-page-nb-display"
-                >
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="15">15</option>
-                </select>
-              </Link>
+              <select
+                value={limit}
+                onChange={handleChangeSelect}
+                className="select-page-nb-display"
+              >
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+              </select>
             </label>
           </div>
-          <div className="main-content">
-            {data.offers.map((offer) => {
-              return (
-                <div key={offer._id} className="product">
-                  <Link to={`/offer/${offer._id}`}>
-                    <Product offer={offer} />
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
+          {numberOfOffers === 0 ? (
+            <p className="p-no-results">😥 Aucun résultat trouvé !</p>
+          ) : (
+            <div className="main-content">
+              {data.offers.map((offer) => {
+                return (
+                  <div key={offer._id} className="product">
+                    <Link to={`/offer/${offer._id}`}>
+                      <Product offer={offer} />
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
         <ul className="page-navigation">
           {page.map((element, index) => {

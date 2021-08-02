@@ -7,7 +7,7 @@
 }
 
 .signup-login-content {
-  margin-top: 15rem;
+  margin-top: 20rem;
 }
 
 .h2-signup-login {
@@ -52,14 +52,14 @@
   height: 4.5rem;
 }
 
-.signup-via-login {
+.toggle-signup-loggin {
   text-align: center;
   font-size: 1.6rem;
   color: var(--main-green);
   margin-top: 2rem;
 }
 
-.signup-via-login:hover {
+.toggle-signup-loggin:hover {
   cursor: pointer;
   text-decoration: underline;
 }

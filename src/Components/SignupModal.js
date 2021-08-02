@@ -1,14 +1,21 @@
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SignupLoginModal.css";
 
-const SignupModal = ({ setShowSignupModal, setShowLoginModal }) => {
+const SignupModal = ({
+  setShowSignupModal,
+  setShowLoginModal,
+  setIsConnected,
+}) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isRevealedPwd, setIsRevealedPwd] = useState(false);
+
+  let history = useHistory();
 
   // Prevent scrolling when the modal is activated
   // Enable again scrolling when the modal is desactivated
@@ -33,6 +40,8 @@ const SignupModal = ({ setShowSignupModal, setShowLoginModal }) => {
       Cookies.set("token", response.data.token, { expires: 7 });
       setShowSignupModal(false);
       setShowLoginModal(false);
+      setIsConnected(Cookies.get("token"));
+      history.push("/");
     } catch (error) {
       alert(error.message);
     }
@@ -60,6 +69,11 @@ const SignupModal = ({ setShowSignupModal, setShowLoginModal }) => {
 
   const handleRevealPwd = () => {
     setIsRevealedPwd(!isRevealedPwd);
+  };
+
+  const handleRedirectToLogin = () => {
+    setShowLoginModal(true);
+    setShowSignupModal(false);
   };
 
   return (
@@ -102,6 +116,9 @@ const SignupModal = ({ setShowSignupModal, setShowLoginModal }) => {
             S'inscrire
           </button>
         </form>
+        <p className="toggle-signup-loggin" onClick={handleRedirectToLogin}>
+          Tu as déjà un compte ? Connecte-toi !
+        </p>
       </div>
     </div>
   );
