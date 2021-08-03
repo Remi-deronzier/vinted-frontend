@@ -15,9 +15,10 @@ import {
   faSearch,
   faEye,
   faWindowClose,
+  faQuestionCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
-library.add(faSearch, faEye, faWindowClose);
+library.add(faSearch, faEye, faWindowClose, faQuestionCircle);
 
 function App() {
   const [limit, setLimit] = useState(5);
@@ -31,6 +32,17 @@ function App() {
   const [debouncedFinalRangeValues] = useDebounce(finalRangeValues, 500);
   const [sort, setSort] = useState(false);
   const [debouncedSort] = useDebounce(sort, 500);
+
+  const handleLoginSignup = (token, avatar, username) => {
+    Cookies.set("token", token, { expires: 7 });
+    Cookies.set("username", username, { expires: 7 });
+    if (avatar) {
+      Cookies.set("avatar", avatar.secure_url, {
+        expires: 7,
+      });
+    }
+    setIsConnected(Cookies.get("token"));
+  };
 
   return (
     <Router>
@@ -51,14 +63,14 @@ function App() {
         <SignupModal
           setShowSignupModal={setShowSignupModal}
           setShowLoginModal={setShowLoginModal}
-          setIsConnected={setIsConnected}
+          handleLoginSignup={handleLoginSignup}
         />
       )}
       {showLoginModal && (
         <LoginModal
           setShowLoginModal={setShowLoginModal}
           setShowSignupModal={setShowSignupModal}
-          setIsConnected={setIsConnected}
+          handleLoginSignup={handleLoginSignup}
         />
       )}
       <Switch>

@@ -36,6 +36,7 @@ const Header = ({
   const handleLogout = () => {
     Cookies.remove("token");
     Cookies.remove("avatar");
+    Cookies.remove("username");
     setIsConnected("");
     history.push("/");
   };

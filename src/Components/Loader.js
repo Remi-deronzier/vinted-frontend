@@ -1,8 +1,8 @@
 import "./Loader.css";
 
-function Loader() {
+function Loader({ className }) {
   return (
-    <div className="container-loader">
+    <div className={className}>
       <div className="loader">
         <div className="back-loader">
           <div className="loader-content"></div>

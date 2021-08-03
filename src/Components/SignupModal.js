@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import Cookies from "js-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SignupLoginModal.css";
 
 const SignupModal = ({
   setShowSignupModal,
   setShowLoginModal,
-  setIsConnected,
+  handleLoginSignup,
 }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -37,11 +36,12 @@ const SignupModal = ({
         "https://vinted-api-remi.herokuapp.com/user/signup",
         data
       );
-      Cookies.set("token", response.data.token, { expires: 7 });
+      const token = response.data.token;
+      const { username, avatar } = response.data.account;
+      handleLoginSignup(token, avatar, username);
       setShowSignupModal(false);
       setShowLoginModal(false);
-      setIsConnected(Cookies.get("token"));
-      history.push("/");
+      history.push("/?onboarding=true");
     } catch (error) {
       alert(error.message);
     }

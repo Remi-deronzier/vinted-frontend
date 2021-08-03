@@ -82,13 +82,17 @@
   overflow: hidden;
 }
 
+.product-description-fade-tooltip {
+  position: relative;
+}
+
 /* ELLIPSIS TEXT */
 
 .fade {
   font-size: 1.6rem;
   line-height: 2.2rem;
   position: relative;
-  height: 13.2rem;
+  max-height: 13.2rem;
 }
 
 .fade:after {
@@ -97,7 +101,7 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 80%;
+  width: 120%;
   height: 2.2rem;
   background: linear-gradient(
     to right,
@@ -106,28 +110,15 @@
   );
 }
 
-/* Tooltip container */
-/* .tooltip {
-  position: relative;
-  display: inline-block;
-} */
+/* TOOLTIP */
 
-/* Tooltip text */
-.tooltiptext {
-  visibility: hidden;
-  background-color: black;
-  color: #fff;
+.tooltip {
+  width: 20rem;
   text-align: center;
-  /* padding: 5px 0; */
-  border-radius: 6px;
-  position: absolute;
-  top: 0;
-  z-index: 1000;
 }
 
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-  visibility: visible;
+.icon-info {
+  color: var(--main-green);
 }
 
 .avatar-description {

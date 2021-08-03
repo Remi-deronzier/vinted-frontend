@@ -5,9 +5,11 @@ import { currencyFormat } from "../helpers/helper";
 import avatar from "../assets/images/avatar.png";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ReactTooltip from "react-tooltip";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import fillImage from "../assets/images/icon-clothes.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const OfferPage = () => {
   const { id } = useParams();
@@ -49,7 +51,7 @@ const OfferPage = () => {
   };
 
   return isLoading ? (
-    <Loader />
+    <Loader className="container-loader-main" />
   ) : (
     <div className="offer-page">
       <div className="container-offer-page">
@@ -160,18 +162,39 @@ const OfferPage = () => {
             </div>
             <div className="detail-call2">
               <p className="title-product">{product.product_name}</p>
-              <div className="fade description-product">
-                <p>{product.product_description}</p>
-                <p className="tooltiptext">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Accusamus doloribus esse blanditiis nesciunt, tempore et hic
-                  libero quibusdam explicabo quo, error voluptates. Hic, optio
-                  corrupti. Natus temporibus voluptatem veritatis et! Lorem,
-                  ipsum dolor sit amet consectetur adipisicing elit. Optio, ab
-                  perspiciatis neque incidunt possimus eaque ut delectus
-                  praesentium. Perspiciatis, vitae labore ratione unde commodi
-                  neque assumenda asperiores praesentium explicabo quo.
-                </p>
+              <div className="product-description-fade-tooltip">
+                <div className="fade description-product">
+                  <p>{product.product_description}</p>
+                </div>
+                <a data-tip={product.product_description}>
+                  {" "}
+                  <FontAwesomeIcon
+                    icon="question-circle"
+                    className="icon-info"
+                  />{" "}
+                </a>
+                <ReactTooltip
+                  place="right"
+                  type="dark"
+                  effect="solid"
+                  className="tooltip"
+                />
+                {/* <div className="container-tooltip">
+                  <p className="tooltip">
+                    {product.product_description}
+                    <p className="tooltiptext">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                      Accusamus doloribus esse blanditiis nesciunt, tempore et
+                      hic libero quibusdam explicabo quo, error voluptates. Hic,
+                      optio corrupti. Natus temporibus voluptatem veritatis et!
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Optio, ab perspiciatis neque incidunt possimus eaque ut
+                      delectus praesentium. Perspiciatis, vitae labore ratione
+                      unde commodi neque assumenda asperiores praesentium
+                      explicabo quo.
+                    </p>
+                  </p>
+                </div> */}
               </div>
               <div className="avatar-description">
                 <img

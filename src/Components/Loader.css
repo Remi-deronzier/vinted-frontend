@@ -1,7 +1,15 @@
-.container-loader {
+.container-loader-main {
   width: 100vw;
   height: 100vh;
   position: fixed;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-loader-offers {
+  margin-bottom: 5rem;
   background-color: white;
   display: flex;
   justify-content: center;
