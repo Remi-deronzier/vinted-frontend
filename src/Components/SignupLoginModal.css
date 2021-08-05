@@ -12,28 +12,13 @@
 
 .modal-signup-login {
   width: 50vw;
-  height: 70vh;
+  padding: 3rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #fff;
   border-radius: 0.5rem;
   position: relative;
-}
-
-.btn-close-signup-login-modal {
-  position: absolute;
-  font-weight: bold;
-  top: 1rem;
-  right: 1rem;
-  color: #aaaaaa;
-  transition: color 0.15s;
-}
-
-.btn-close-signup-login-modal:hover,
-.btn-close-signup-login-modal:focus {
-  color: #000;
-  cursor: pointer;
 }
 
 .h2-signup-login {
@@ -50,7 +35,7 @@
   align-items: center;
 }
 
-.input-signup-login:not(:last-child) {
+.input-signup-login {
   margin-bottom: 3.5rem;
 }
 
@@ -77,6 +62,7 @@
   font-size: 1.6rem;
   position: relative;
   height: 4.5rem;
+  margin-top: 3rem;
 }
 
 .toggle-signup-loggin {
@@ -89,4 +75,24 @@
 .toggle-signup-loggin:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+.p-mandatory-fields-login-signup {
+  font-size: 1.6rem;
+}
+
+.dropzone-no-pictures-signup {
+  width: 100%;
+  height: 20rem;
+  border: 0.1rem dashed #bbb7b7;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.dropzone-with-pictures-signup {
+  margin-bottom: 3.5rem;
 }

@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import LoaderSubmission from "./LoaderSubmission";
+import { useState, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDropzone } from "react-dropzone";
 import "./SignupLoginModal.css";
 
 const SignupModal = ({
@@ -13,15 +15,17 @@ const SignupModal = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isRevealedPwd, setIsRevealedPwd] = useState(false);
+  const [file, setFile] = useState([]);
+  const [preview, setPreview] = useState([]);
 
   let history = useHistory();
 
   const signup = async () => {
-    const data = {
-      email: email,
-      username: username,
-      password: password,
-    };
+    const formData = new FormData();
+    formData.append("picture", file[0]);
+    formData.append("email", email);
+    formData.append("username", username);
+    formData.append("password", password);
     try {
       // Disable the submit button
       document
@@ -33,7 +37,7 @@ const SignupModal = ({
         .classList.remove("loader-circle-hidden");
       const response = await axios.post(
         "https://vinted-api-remi.herokuapp.com/user/signup",
-        data
+        formData
       );
       const token = response.data.token;
       const { username, avatar } = response.data.account;
@@ -49,9 +53,6 @@ const SignupModal = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     await signup();
-    setUsername("");
-    setEmail("");
-    setPassword("");
   };
 
   const handleUsername = (e) => {
@@ -99,13 +100,35 @@ const SignupModal = ({
     };
   }, [setShowSignupModal]);
 
+  // UPLOAD A PICTURE FOR A NEW USER
+
+  const onDrop = useCallback((acceptedFile) => {
+    const newFiles = acceptedFile;
+    setFile(newFiles);
+    const currentPreview = URL.createObjectURL(...acceptedFile);
+    const newPreview = [currentPreview];
+    setPreview(newPreview);
+  }, []);
+
+  const { getRootProps, getInputProps } = useDropzone(
+    {
+      onDrop,
+      disabled: file.length > 0,
+      maxFiles: 1,
+      accept: "image/jpeg, image/png",
+    },
+    [file]
+  );
+
+  const handleDeletePicture = () => {
+    setPreview([]);
+    setFile([]);
+  };
+
   return (
     <div className="background-modal" id="modal">
       <div className="modal-signup-login">
-        <span
-          className="btn-close-signup-login-modal"
-          onClick={handleCloseSignupModal}
-        >
+        <span className="btn-close" onClick={handleCloseSignupModal}>
           <FontAwesomeIcon icon="window-close" />
         </span>
         <div className="signup-login-content">
@@ -114,7 +137,7 @@ const SignupModal = ({
             <input
               className="input-signup-login input"
               type="text"
-              placeholder="Nom d'utilisateur"
+              placeholder="Nom d'utilisateur *"
               value={username}
               onChange={handleUsername}
               required
@@ -122,7 +145,7 @@ const SignupModal = ({
             <input
               className="input-signup-login input"
               type="email"
-              placeholder="Email"
+              placeholder="Email *"
               value={email}
               onChange={handleEmail}
               required
@@ -131,7 +154,7 @@ const SignupModal = ({
               <input
                 className="input-signup-login input"
                 type={isRevealedPwd ? "text" : "password"}
-                placeholder="Mot de passe"
+                placeholder="Mot de passe *"
                 value={password}
                 onChange={handlePassword}
                 required
@@ -142,17 +165,46 @@ const SignupModal = ({
                 onClick={handleRevealPwd}
               />
             </div>
+            <div
+              {...getRootProps({
+                className:
+                  preview.length === 0
+                    ? "dropzone-no-pictures-signup"
+                    : "dropzone-with-pictures-signup",
+              })}
+            >
+              <input {...getInputProps()} />{" "}
+              <aside>
+                {preview.length !== 0 && (
+                  <div>
+                    <img src={preview[0]} alt={file[0].name} />
+                    <FontAwesomeIcon
+                      icon="window-close"
+                      className="btn-close"
+                      onClick={handleDeletePicture}
+                    />
+                  </div>
+                )}
+              </aside>
+              {file.length < 1 && (
+                <button
+                  className="btn-white-border-green btn-add-no-pictures-publish"
+                  type="button"
+                >
+                  + Choisis une photo de profil
+                </button>
+              )}
+            </div>
+            <p className="p-mandatory-fields-login-signup">
+              <span className="asterisk">* </span>Champs obligatoires
+            </p>
             <button
               type="submit"
               className="btn-signup-login btn-green"
               id="submit-btn"
             >
               S'inscrire
-              <div className="loader-circle loader-circle-hidden">
-                <div className="circle-loader circle-1"></div>
-                <div className="circle-loader circle-2"></div>
-                <div className="circle-loader circle-3"></div>
-              </div>
+              <LoaderSubmission />
             </button>
           </form>
           <p className="toggle-signup-loggin" onClick={handleRedirectToLogin}>

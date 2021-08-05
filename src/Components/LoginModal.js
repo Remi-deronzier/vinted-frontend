@@ -1,3 +1,4 @@
+import LoaderSubmission from "./LoaderSubmission";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -47,8 +48,6 @@ const LoginModal = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login();
-    setEmail("");
-    setPassword("");
   };
 
   const handleEmail = (e) => {
@@ -95,10 +94,7 @@ const LoginModal = ({
   return (
     <div className="background-modal" id="modal">
       <div className="modal-signup-login">
-        <span
-          className="btn-close-signup-login-modal"
-          onClick={handleCloseLoginModal}
-        >
+        <span className="btn-close" onClick={handleCloseLoginModal}>
           <FontAwesomeIcon icon="window-close" />
         </span>
         <div className="signup-login-content">
@@ -107,7 +103,7 @@ const LoginModal = ({
             <input
               className="input-signup-login input"
               type="email"
-              placeholder="Email"
+              placeholder="Email *"
               value={email}
               onChange={handleEmail}
               required
@@ -116,7 +112,7 @@ const LoginModal = ({
               <input
                 className="input-signup-login input"
                 type={isRevealedPwd ? "text" : "password"}
-                placeholder="Mot de passe"
+                placeholder="Mot de passe *"
                 value={password}
                 onChange={handlePassword}
                 required
@@ -127,17 +123,16 @@ const LoginModal = ({
                 onClick={handleRevealPwd}
               />
             </div>
+            <p className="p-mandatory-fields-login-signup">
+              <span className="asterisk">* </span>Champs obligatoires
+            </p>
             <button
               type="submit"
               className="btn-signup-login btn-green"
               id="submit-btn"
             >
               Se connecter
-              <div className="loader-circle loader-circle-hidden">
-                <div className="circle-loader circle-1"></div>
-                <div className="circle-loader circle-2"></div>
-                <div className="circle-loader circle-3"></div>
-              </div>
+              <LoaderSubmission />
             </button>
           </form>
           <p className="toggle-signup-loggin" onClick={handleRedirectToSignup}>

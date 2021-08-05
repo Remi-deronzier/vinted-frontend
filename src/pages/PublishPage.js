@@ -1,3 +1,4 @@
+import LoaderSubmission from "../Components/LoaderSubmission";
 import "./PublishPage.css";
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
@@ -166,7 +167,7 @@ const PublishPage = ({ isConnected }) => {
                         <img src={url} alt={files[index].name} />
                         <FontAwesomeIcon
                           icon="window-close"
-                          className="icon-delete-picture"
+                          className="btn-close"
                           onClick={() => handleDeletePicture(index)}
                         />
                       </div>
@@ -175,6 +176,7 @@ const PublishPage = ({ isConnected }) => {
                 </aside>
                 {files.length <= 4 && (
                   <button
+                    type="button"
                     className={
                       preview.length === 0
                         ? "btn-white-border-green btn-add-no-pictures-publish"
@@ -189,7 +191,7 @@ const PublishPage = ({ isConnected }) => {
             <div className="publish-title-description">
               <div className="publish-title">
                 <label className="label-publish-page" htmlFor="title">
-                  Titre
+                  Titre <span className="asterisk">*</span>
                 </label>
                 <input
                   type="text"
@@ -203,7 +205,7 @@ const PublishPage = ({ isConnected }) => {
               </div>
               <div className="publish-description">
                 <label htmlFor="description" className="label-publish-page">
-                  Décris ton article
+                  Décris ton article <span className="asterisk">*</span>
                 </label>
                 <textarea
                   type="text"
@@ -285,7 +287,7 @@ const PublishPage = ({ isConnected }) => {
             </div>
             <div className="publish-price">
               <label htmlFor="price" className="label-publish-page">
-                Prix
+                Prix <span className="asterisk">*</span>
               </label>
               <input
                 type="number"
@@ -298,17 +300,16 @@ const PublishPage = ({ isConnected }) => {
               />
             </div>
             <div className="div-btn-add-publish">
+              <p className="p-mandatory-fields">
+                <span className="asterisk">* </span>Champs obligatoires
+              </p>
               <button
                 type="submit"
                 className="btn-green btn-add-publish"
                 id="submit-btn"
               >
                 Ajouter
-                <div className="loader-circle loader-circle-hidden">
-                  <div className="circle-loader circle-1"></div>
-                  <div className="circle-loader circle-2"></div>
-                  <div className="circle-loader circle-3"></div>
-                </div>
+                <LoaderSubmission />
               </button>
             </div>
           </form>

@@ -52,6 +52,23 @@ button[disabled="disabled"] {
   cursor: not-allowed;
 }
 
+/* buttons to close modals and pictures */
+
+.btn-close {
+  position: absolute;
+  font-weight: bold;
+  top: 1rem;
+  right: 1rem;
+  color: #aaaaaa;
+  transition: color 0.15s;
+}
+
+.btn-close:hover,
+.btn-close:focus {
+  color: #000;
+  cursor: pointer;
+}
+
 /* INPUTS */
 
 .input:focus {
