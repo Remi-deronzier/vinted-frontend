@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import "./OfferPage.css";
 import Loader from "../Components/Loader";
 import { currencyFormat } from "../helpers/helper";
-import avatar from "../assets/images/avatar.png";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ReactTooltip from "react-tooltip";
@@ -10,6 +9,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import fillImage from "../assets/images/icon-clothes.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Avatar from "react-avatar";
 
 const OfferPage = () => {
   const { id } = useParams();
@@ -179,33 +179,22 @@ const OfferPage = () => {
                   effect="solid"
                   className="tooltip"
                 />
-                {/* <div className="container-tooltip">
-                  <p className="tooltip">
-                    {product.product_description}
-                    <p className="tooltiptext">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                      Accusamus doloribus esse blanditiis nesciunt, tempore et
-                      hic libero quibusdam explicabo quo, error voluptates. Hic,
-                      optio corrupti. Natus temporibus voluptatem veritatis et!
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                      Optio, ab perspiciatis neque incidunt possimus eaque ut
-                      delectus praesentium. Perspiciatis, vitae labore ratione
-                      unde commodi neque assumenda asperiores praesentium
-                      explicabo quo.
-                    </p>
-                  </p>
-                </div> */}
               </div>
               <div className="avatar-description">
-                <img
-                  className="avatar-image"
-                  src={
-                    product.owner.account.avatar
-                      ? product.owner.account.avatar.secure_url
-                      : avatar
-                  }
-                  alt={product.owner.account.username}
-                />
+                {product.owner.account.avatar ? (
+                  <img
+                    src={product.owner.account.avatar.secure_url}
+                    alt="avatar"
+                    className="avatar-image"
+                  />
+                ) : (
+                  <Avatar
+                    name={product.owner.account.username}
+                    className="avatar-image"
+                    size="5rem"
+                    textSizeRatio={1.75}
+                  />
+                )}
                 <p className="avatar-username">
                   {product.owner.account.username}
                 </p>

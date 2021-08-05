@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
-import avatar from "../assets/images/avatar.png";
 import { useHistory } from "react-router-dom";
 import { Range, getTrackBackground } from "react-range";
+import Avatar from "react-avatar";
 
 const Header = ({
   setShowSignupModal,
@@ -138,11 +138,20 @@ const Header = ({
               <button onClick={handleLogout} className="btn-green">
                 Se déconnecter
               </button>
-              <img
-                src={Cookies.get("avatar") || avatar}
-                alt="avatar"
-                className="avatar-header"
-              />
+              {Cookies.get("avatar") ? (
+                <img
+                  src={Cookies.get("avatar")}
+                  alt="avatar"
+                  className="avatar-header"
+                />
+              ) : (
+                <Avatar
+                  name={Cookies.get("username")}
+                  className="avatar-header"
+                  size="4rem"
+                  textSizeRatio={2}
+                />
+              )}
             </div>
           )}
         </div>

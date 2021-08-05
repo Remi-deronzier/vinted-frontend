@@ -1,21 +1,26 @@
 import { currencyFormat } from "../helpers/helper";
 import "./Product.css";
-import avatar from "../assets/images/avatar.png";
 import fillImage from "../assets/images/icon-clothes.png";
+import Avatar from "react-avatar";
 
 const Product = ({ offer }) => {
   return (
     <>
       <div className="owner-details">
-        <img
-          src={
-            offer.owner.account.avatar
-              ? offer.owner.account.avatar.secure_url
-              : avatar
-          }
-          alt={offer.owner.account.username}
-          className="avatar"
-        />
+        {offer.owner.account.avatar ? (
+          <img
+            src={offer.owner.account.avatar.secure_url}
+            alt={offer.owner.account.username}
+            className="avatar"
+          />
+        ) : (
+          <Avatar
+            name={offer.owner.account.username}
+            className="avatar"
+            size="2.5rem"
+            textSizeRatio={1.5}
+          />
+        )}
         <span className="owner-username">{offer.owner.account.username}</span>
       </div>
       <img
