@@ -166,13 +166,13 @@ const OfferPage = () => {
                 <div className="fade description-product">
                   <p>{product.product_description}</p>
                 </div>
-                <a data-tip={product.product_description}>
+                <span data-tip={product.product_description}>
                   {" "}
                   <FontAwesomeIcon
                     icon="question-circle"
                     className="icon-info"
                   />{" "}
-                </a>
+                </span>
                 <ReactTooltip
                   place="right"
                   type="dark"

@@ -15,15 +15,6 @@ const LoginModal = ({
 
   let history = useHistory();
 
-  // Prevent scrolling when the modal is activated
-  // Enable again scrolling when the modal is desactivated
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
-
   const login = async () => {
     const data = {
       email: email,
@@ -69,41 +60,73 @@ const LoginModal = ({
     setShowLoginModal(false);
   };
 
+  // MODAL
+
+  const handleCloseLoginModal = () => {
+    setShowLoginModal(false);
+  };
+
+  // Prevent scrolling when the modal is activated
+  // Enable again scrolling when the modal is desactivated
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
+  useEffect(() => {
+    const modal = document.getElementById("modal");
+    window.onclick = function (event) {
+      if (event.target === modal) {
+        setShowLoginModal(false);
+      }
+    };
+  }, [setShowLoginModal]);
+
   return (
-    <div className="modal-signup-login">
-      <div className="signup-login-content">
-        <h2 className="h2-signup-login">Se connecter</h2>
-        <form onSubmit={handleSubmit} className="form-signup-login">
-          <input
-            className="input-signup-login input"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={handleEmail}
-            required
-          />
-          <div className="div-password">
+    <div className="background-modal" id="modal">
+      <div className="modal-signup-login">
+        <span
+          className="btn-close-signup-login-modal"
+          onClick={handleCloseLoginModal}
+        >
+          <FontAwesomeIcon icon="window-close" />
+        </span>
+        <div className="signup-login-content">
+          <h2 className="h2-signup-login">Se connecter</h2>
+          <form onSubmit={handleSubmit} className="form-signup-login">
             <input
               className="input-signup-login input"
-              type={isRevealedPwd ? "text" : "password"}
-              placeholder="Mot de passe"
-              value={password}
-              onChange={handlePassword}
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={handleEmail}
               required
             />
-            <FontAwesomeIcon
-              icon="eye"
-              className="icon-eye"
-              onClick={handleRevealPwd}
-            />
-          </div>
-          <button type="submit" className="btn-signup-login btn-green">
-            Se connecter
-          </button>
-        </form>
-        <p className="toggle-signup-loggin" onClick={handleRedirectToSignup}>
-          Pas encore de compte ? Inscris-toi !
-        </p>
+            <div className="div-password">
+              <input
+                className="input-signup-login input"
+                type={isRevealedPwd ? "text" : "password"}
+                placeholder="Mot de passe"
+                value={password}
+                onChange={handlePassword}
+                required
+              />
+              <FontAwesomeIcon
+                icon="eye"
+                className="icon-eye"
+                onClick={handleRevealPwd}
+              />
+            </div>
+            <button type="submit" className="btn-signup-login btn-green">
+              Se connecter
+            </button>
+          </form>
+          <p className="toggle-signup-loggin" onClick={handleRedirectToSignup}>
+            Pas encore de compte ? Inscris-toi !
+          </p>
+        </div>
       </div>
     </div>
   );

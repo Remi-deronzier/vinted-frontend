@@ -23,16 +23,12 @@ const Header = ({
 
   const handleSignupModalTrue = () => {
     setShowSignupModal(true);
-    setShowLoginModal(false);
   };
+
   const handleLoginModalTrue = () => {
     setShowLoginModal(true);
-    setShowSignupModal(false);
   };
-  const handleSignupLoginModalFalse = () => {
-    setShowSignupModal(false);
-    setShowLoginModal(false);
-  };
+
   const handleLogout = () => {
     Cookies.remove("token");
     Cookies.remove("avatar");
@@ -41,7 +37,7 @@ const Header = ({
     history.push("/");
   };
 
-  const handleChange = (e) => {
+  const handleChangeSearch = (e) => {
     setSearch(e.target.value);
   };
 
@@ -61,11 +57,7 @@ const Header = ({
     <header>
       <div className="wrapper-header container">
         <div className="header-call1">
-          <Link
-            to="/"
-            onClick={handleSignupLoginModalFalse}
-            className="div-logo"
-          >
+          <Link to="/" className="div-logo">
             <img className="logo-vinted" src={logoVinted} alt="logo Vinted" />
           </Link>
           <div className="div-filter">
@@ -75,7 +67,7 @@ const Header = ({
                 type="text"
                 placeholder="Rechercher des articles"
                 className="search-input"
-                onChange={handleChange}
+                onChange={handleChangeSearch}
                 value={search}
               />
             </div>

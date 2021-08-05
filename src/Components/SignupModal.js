@@ -16,15 +16,6 @@ const SignupModal = ({
 
   let history = useHistory();
 
-  // Prevent scrolling when the modal is activated
-  // Enable again scrolling when the modal is desactivated
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
-
   const signup = async () => {
     const data = {
       email: email,
@@ -76,49 +67,81 @@ const SignupModal = ({
     setShowSignupModal(false);
   };
 
+  // MODAL
+
+  const handleCloseSignupModal = () => {
+    setShowSignupModal(false);
+  };
+
+  // Prevent scrolling when the modal is activated
+  // Enable again scrolling when the modal is desactivated
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
+  useEffect(() => {
+    const modal = document.getElementById("modal");
+    window.onclick = function (event) {
+      if (event.target === modal) {
+        setShowSignupModal(false);
+      }
+    };
+  }, [setShowSignupModal]);
+
   return (
-    <div className="modal-signup-login">
-      <div className="signup-login-content">
-        <h2 className="h2-signup-login">S'inscrire</h2>
-        <form onSubmit={handleSubmit} className="form-signup-login">
-          <input
-            className="input-signup-login input"
-            type="text"
-            placeholder="Nom d'utilisateur"
-            value={username}
-            onChange={handleUsername}
-            required
-          />
-          <input
-            className="input-signup-login input"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={handleEmail}
-            required
-          />
-          <div className="div-password">
+    <div className="background-modal" id="modal">
+      <div className="modal-signup-login">
+        <span
+          className="btn-close-signup-login-modal"
+          onClick={handleCloseSignupModal}
+        >
+          <FontAwesomeIcon icon="window-close" />
+        </span>
+        <div className="signup-login-content">
+          <h2 className="h2-signup-login">S'inscrire</h2>
+          <form onSubmit={handleSubmit} className="form-signup-login">
             <input
               className="input-signup-login input"
-              type={isRevealedPwd ? "text" : "password"}
-              placeholder="Mot de passe"
-              value={password}
-              onChange={handlePassword}
+              type="text"
+              placeholder="Nom d'utilisateur"
+              value={username}
+              onChange={handleUsername}
               required
             />
-            <FontAwesomeIcon
-              icon="eye"
-              className="icon-eye"
-              onClick={handleRevealPwd}
+            <input
+              className="input-signup-login input"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={handleEmail}
+              required
             />
-          </div>
-          <button type="submit" className="btn-signup-login btn-green">
-            S'inscrire
-          </button>
-        </form>
-        <p className="toggle-signup-loggin" onClick={handleRedirectToLogin}>
-          Tu as déjà un compte ? Connecte-toi !
-        </p>
+            <div className="div-password">
+              <input
+                className="input-signup-login input"
+                type={isRevealedPwd ? "text" : "password"}
+                placeholder="Mot de passe"
+                value={password}
+                onChange={handlePassword}
+                required
+              />
+              <FontAwesomeIcon
+                icon="eye"
+                className="icon-eye"
+                onClick={handleRevealPwd}
+              />
+            </div>
+            <button type="submit" className="btn-signup-login btn-green">
+              S'inscrire
+            </button>
+          </form>
+          <p className="toggle-signup-loggin" onClick={handleRedirectToLogin}>
+            Tu as déjà un compte ? Connecte-toi !
+          </p>
+        </div>
       </div>
     </div>
   );
