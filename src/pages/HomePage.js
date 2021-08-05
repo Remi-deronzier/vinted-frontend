@@ -80,7 +80,7 @@ const Home = ({
 
   const handleLoginModalTrue = () => {
     setShowLoginModal(true);
-    setShowSignupModal(false);
+    // setShowSignupModal(false);
   };
 
   const handleCloseModal = () => {

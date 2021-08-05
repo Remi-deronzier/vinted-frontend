@@ -23,6 +23,14 @@ const SignupModal = ({
       password: password,
     };
     try {
+      // Disable the submit button
+      document
+        .querySelector("#submit-btn")
+        .setAttribute("disabled", "disabled");
+      // Launch the loader
+      document
+        .querySelector(".loader-circle")
+        .classList.remove("loader-circle-hidden");
       const response = await axios.post(
         "https://vinted-api-remi.herokuapp.com/user/signup",
         data
@@ -134,8 +142,17 @@ const SignupModal = ({
                 onClick={handleRevealPwd}
               />
             </div>
-            <button type="submit" className="btn-signup-login btn-green">
+            <button
+              type="submit"
+              className="btn-signup-login btn-green"
+              id="submit-btn"
+            >
               S'inscrire
+              <div className="loader-circle loader-circle-hidden">
+                <div className="circle-loader circle-1"></div>
+                <div className="circle-loader circle-2"></div>
+                <div className="circle-loader circle-3"></div>
+              </div>
             </button>
           </form>
           <p className="toggle-signup-loggin" onClick={handleRedirectToLogin}>
