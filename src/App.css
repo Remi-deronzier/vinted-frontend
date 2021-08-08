@@ -8,7 +8,7 @@
   --grey-border-bottom: #ece9e9;
   --width-border-bottom: 0.1rem;
   --grey-background: #ebedee;
-  --menu-transition: 0.3s;
+  --transition-time-menu: 0.3s;
   --line-icon-hamburger-menu: #999999;
   --width-icon-hamburger-menu: 2rem;
   --height-icon-hamburger-menu: 0.15rem;
@@ -82,7 +82,6 @@ button[disabled="disabled"] {
 }
 
 .input {
-  width: 30rem;
   font-family: "Maison Neue";
   font-size: 1.6rem;
   border: none;
@@ -103,5 +102,11 @@ a {
     width: auto;
     padding: 0 2rem;
     box-sizing: border-box;
+  }
+}
+
+@media (max-width: 576px) {
+  html {
+    font-size: 50%;
   }
 }

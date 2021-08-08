@@ -12,7 +12,8 @@
 
 .modal-signup-login {
   width: 50vw;
-  padding: 3rem 0;
+  padding: 3rem 1rem;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,6 +30,10 @@
   font-weight: bold;
 }
 
+.signup-login-content {
+  width: 70%;
+}
+
 .form-signup-login {
   display: flex;
   flex-direction: column;
@@ -37,10 +42,11 @@
 
 .input-signup-login {
   margin-bottom: 3.5rem;
+  width: 100%;
 }
 
 .div-password {
-  width: 30rem;
+  width: 100%;
   position: relative;
 }
 
@@ -58,7 +64,7 @@
 
 .btn-signup-login {
   font-family: "Maison Neue";
-  width: 30rem;
+  width: 100%;
   font-size: 1.6rem;
   position: relative;
   height: 4.5rem;
@@ -95,4 +101,28 @@
 
 .dropzone-with-pictures-signup {
   margin-bottom: 3.5rem;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+  .modal-signup-login {
+    width: 60vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-signup-login {
+    width: 73vw;
+  }
+}
+
+@media (max-width: 576px) {
+  .modal-signup-login {
+    width: 80vw;
+  }
+
+  .signup-login-content {
+    width: 80%;
+  }
 }

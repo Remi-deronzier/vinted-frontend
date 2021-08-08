@@ -39,3 +39,11 @@
   font-size: 1.2rem;
   color: #999999;
 }
+
+/* RESPONSIVE */
+
+@media (max-width: 576px) {
+  .product-image {
+    height: 25rem;
+  }
+}

@@ -79,7 +79,6 @@ const Home = ({
 
   const handleLoginModalTrue = () => {
     setShowLoginModal(true);
-    // setShowSignupModal(false);
   };
 
   const handleCloseModal = () => {
@@ -101,7 +100,11 @@ const Home = ({
         ariaHideApp={false}
         className="welcome-modal"
       >
-        Bonjour {Cookies.get("username")}, bienvenue sur Vinted ! 🎉
+        Bonjour{" "}
+        <span className="username-welcome-modal">
+          {Cookies.get("username")}
+        </span>
+        , bienvenue sur Vinted ! 🎉
       </Modal>
       {isLoadingHomePage ? (
         <Loader className="container-loader-main" />

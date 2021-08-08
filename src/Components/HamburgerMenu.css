@@ -26,6 +26,7 @@
   background-color: var(--line-icon-hamburger-menu);
   display: inline-block;
   position: relative;
+  transition: all var(--transition-time-menu);
 }
 
 /* Second and third line */
@@ -38,7 +39,7 @@
   height: var(--height-icon-hamburger-menu);
   background-color: var(--line-icon-hamburger-menu);
   content: "";
-  transition: all var(--menu-transition);
+  transition: all var(--transition-time-menu);
 }
 
 .navigation-icon::before {
@@ -63,7 +64,8 @@
   z-index: -1;
   border-radius: 0.5rem;
   opacity: 0;
-  transition: all var(--menu-transition);
+  transition: all var(--transition-time-menu);
+  visibility: hidden;
 }
 
 .menu ul {
@@ -78,7 +80,6 @@
 
 .menu-content {
   box-sizing: border-box;
-  transition: all var(--menu-transition);
   height: 4rem;
 }
 
@@ -98,6 +99,7 @@
 
 .navigation-checkbox:checked ~ .menu {
   opacity: 1;
+  visibility: visible;
   z-index: 999;
 }
 
