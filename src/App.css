@@ -8,6 +8,12 @@
   --grey-border-bottom: #ece9e9;
   --width-border-bottom: 0.1rem;
   --grey-background: #ebedee;
+  --menu-transition: 0.3s;
+  --line-icon-hamburger-menu: #999999;
+  --width-icon-hamburger-menu: 2rem;
+  --height-icon-hamburger-menu: 0.15rem;
+  --top-icon-hamburger-menu: 0.7rem;
+  --bottom-icon-hamburger-menu: -0.7rem;
 }
 
 html {
@@ -88,4 +94,14 @@ button[disabled="disabled"] {
 
 a {
   text-decoration: none;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1260px) {
+  .container {
+    width: auto;
+    padding: 0 2rem;
+    box-sizing: border-box;
+  }
 }

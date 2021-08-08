@@ -128,3 +128,11 @@ h1 {
   outline: none;
   color: white;
 }
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+  .call-to-action-send {
+    top: calc(var(--height--header) + 10rem);
+  }
+}

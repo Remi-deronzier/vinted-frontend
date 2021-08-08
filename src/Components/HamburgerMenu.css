@@ -1,0 +1,126 @@
+.navigation {
+  display: none;
+}
+
+/* MENU BUTTON */
+
+.navigation-checkbox {
+  display: none;
+}
+
+.navigation-btn {
+  cursor: pointer;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* First line */
+
+.navigation-icon {
+  width: var(--width-icon-hamburger-menu);
+  height: var(--height-icon-hamburger-menu);
+  background-color: var(--line-icon-hamburger-menu);
+  display: inline-block;
+  position: relative;
+}
+
+/* Second and third line */
+
+.navigation-icon::before,
+.navigation-icon::after {
+  position: absolute;
+  display: inline-block;
+  width: var(--width-icon-hamburger-menu);
+  height: var(--height-icon-hamburger-menu);
+  background-color: var(--line-icon-hamburger-menu);
+  content: "";
+  transition: all var(--menu-transition);
+}
+
+.navigation-icon::before {
+  top: var(--bottom-icon-hamburger-menu);
+}
+
+.navigation-icon::after {
+  top: var(--top-icon-hamburger-menu);
+}
+
+/* MENU CONTENT */
+
+.menu {
+  box-shadow: 0.1rem 0.1rem 1rem 0.05rem #ccc;
+  position: absolute;
+  top: 7.1rem;
+  left: 0.5rem;
+  right: 0.5rem;
+  background-color: #fff;
+  margin-right: -2rem;
+  margin-left: -2rem;
+  z-index: -1;
+  border-radius: 0.5rem;
+  opacity: 0;
+  transition: all var(--menu-transition);
+}
+
+.menu ul {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+}
+
+.menu-content:not(:last-of-type) {
+  margin-bottom: 1rem;
+}
+
+.menu-content {
+  box-sizing: border-box;
+  transition: all var(--menu-transition);
+  height: 4rem;
+}
+
+.btn-menu-hamburger {
+  width: 100%;
+  height: 100%;
+  font-size: 1.6rem;
+}
+
+.btn-logIn-menu-hamburger {
+  margin-left: 0;
+}
+
+/* TRANSITIONS */
+
+/* Menu content apparition */
+
+.navigation-checkbox:checked ~ .menu {
+  opacity: 1;
+  z-index: 999;
+}
+
+/* Menu button */
+
+.navigation-checkbox:checked + .navigation-btn .navigation-icon {
+  background-color: transparent;
+}
+
+.navigation-checkbox:checked + .navigation-btn .navigation-icon::before {
+  transform: rotate(135deg);
+  top: 0;
+}
+
+.navigation-checkbox:checked + .navigation-btn .navigation-icon::after {
+  transform: rotate(-135deg);
+  top: 0;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+  .navigation {
+    display: block;
+  }
+}

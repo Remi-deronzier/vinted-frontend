@@ -13,7 +13,6 @@ const Home = ({
   limit,
   setLimit,
   setShowLoginModal,
-  setShowSignupModal,
   isConnected,
   debouncedSearch,
   sort,
@@ -87,11 +86,18 @@ const Home = ({
     setIsWelcomeModalOpen(false);
   };
 
+  const handleAfterOpenFunc = () => {
+    setTimeout(() => {
+      setIsWelcomeModalOpen(false);
+    }, 7000);
+  };
+
   return (
     <>
       <Modal
         isOpen={isWelcomeModalOpen}
         onRequestClose={handleCloseModal}
+        onAfterOpen={handleAfterOpenFunc}
         ariaHideApp={false}
         className="welcome-modal"
       >

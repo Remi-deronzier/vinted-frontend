@@ -1,6 +1,7 @@
 import logoVinted from "../assets/images/vinted-logo.png";
 import { Link } from "react-router-dom";
 import "./Header.css";
+import HamburgerMenu from "./HamburgerMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
@@ -57,9 +58,17 @@ const Header = ({
     <header>
       <div className="wrapper-header container">
         <div className="header-call1">
-          <Link to="/" className="div-logo">
-            <img className="logo-vinted" src={logoVinted} alt="logo Vinted" />
-          </Link>
+          <div className="top-header">
+            <Link to="/" className="div-logo">
+              <img className="logo-vinted" src={logoVinted} alt="logo Vinted" />
+            </Link>
+            <HamburgerMenu
+              isConnected={isConnected}
+              handleLoginModalTrue={handleLoginModalTrue}
+              handleSignupModalTrue={handleSignupModalTrue}
+              handleLogout={handleLogout}
+            />
+          </div>
           <div className="div-filter">
             <div className="search-bar">
               <FontAwesomeIcon icon="search" className="icon-search" />
@@ -135,7 +144,7 @@ const Header = ({
             </div>
           ) : (
             <div className="login-header">
-              <button onClick={handleLogout} className="btn-green">
+              <button onClick={handleLogout} className="btn-white-border-green">
                 Se déconnecter
               </button>
               {Cookies.get("avatar") ? (

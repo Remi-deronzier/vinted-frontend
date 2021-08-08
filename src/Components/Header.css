@@ -30,6 +30,13 @@ header {
   width: 80%;
 }
 
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
 .div-filter {
   width: 70%;
 }
@@ -57,6 +64,10 @@ header {
   box-sizing: border-box;
   width: 100%;
   outline: none;
+}
+
+.search-input:focus {
+  box-shadow: 0.1rem 0.1rem 7rem 0.05rem #ccc;
 }
 
 .icon-search {
@@ -98,6 +109,7 @@ header {
 
 .p-filter-range-sort {
   font-size: 1.2rem;
+  white-space: nowrap;
 }
 
 .filter-range {
@@ -176,8 +188,121 @@ header {
   color: white;
   font-size: 1.2rem;
   background-color: var(--main-green);
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem;
   border-radius: 0.3rem;
   transform: translateX(50%);
   white-space: nowrap;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1260px) {
+  .header-call1 {
+    width: 90%;
+  }
+
+  .signup-login-div-header {
+    margin-left: 4rem;
+  }
+
+  .header-call2 {
+    margin-left: 3rem;
+  }
+
+  .div-logo {
+    margin-right: 3rem;
+  }
+
+  .login-header {
+    margin-left: 5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  header {
+    height: auto;
+  }
+
+  .header-call1 {
+    width: 100%;
+    display: block;
+  }
+
+  .div-logo {
+    padding: 1.5rem 0;
+    margin-right: 0;
+    width: 8rem;
+  }
+
+  .div-filter {
+    border-top: 0.1rem solid var(--grey-border-bottom);
+    width: 100%;
+    padding-top: 1rem;
+  }
+
+  .filter-range-sort {
+    margin: 2.3rem 0 1rem 0;
+  }
+
+  .filter-range {
+    margin-left: 1rem;
+    width: 80%;
+  }
+
+  .signup-login-div-header {
+    display: none;
+  }
+
+  .header-call2 {
+    display: none;
+  }
+
+  .login-header {
+    display: none;
+  }
+
+  /* RANGE */
+
+  .track {
+    margin-right: 1.5rem;
+  }
+
+  .thumb-price {
+    top: -1.9rem;
+    font-size: 1rem;
+    padding: 0.3rem;
+    border-radius: 0.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  /* TOGGLE */
+
+  .lb-filter-price {
+    width: 4rem;
+    height: 2rem;
+    line-height: 2rem;
+  }
+
+  .lb-filter-price::after {
+    top: 0.1rem;
+    left: 0.1rem;
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .input-filter-price:checked + label::after {
+    transform: translate(2rem, 0);
+  }
+
+  .toggle-filter-price {
+    display: block;
+    padding-right: 1rem;
+    box-sizing: border-box;
+    border-right: 0.1rem solid var(--grey-border-bottom);
+  }
+
+  .p-filter-range-sort {
+    margin-bottom: 1rem;
+  }
 }
