@@ -85,7 +85,19 @@ h1 {
 .page-navigation {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-bottom: 5rem;
+}
+
+.icon-arrow-page-navigation {
+  color: var(--main-green);
+  font-size: 3rem;
+  padding: 0 1rem;
+}
+
+.icon-ellipsis-dots {
+  margin: 0 0.5rem;
+  color: var(--main-green);
 }
 
 .page-number {
@@ -109,7 +121,7 @@ h1 {
 
 .p-no-results {
   text-align: center;
-  margin-top: 5rem;
+  margin: 5rem 0;
   color: var(--main-black);
 }
 

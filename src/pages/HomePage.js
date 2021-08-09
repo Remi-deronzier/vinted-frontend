@@ -8,10 +8,9 @@ import axios from "axios";
 import * as qs from "qs";
 import Modal from "react-modal";
 import Cookies from "js-cookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Home = ({
-  limit,
-  setLimit,
   setShowLoginModal,
   isConnected,
   debouncedSearch,
@@ -20,12 +19,23 @@ const Home = ({
 }) => {
   const location = useLocation();
   const params = qs.parse(location.search.slice(1));
-  const pageNumber = params.page ? params.page : 1;
   const onboarding = params.onboarding;
   const [data, setData] = useState({});
   const [isLoadingHomePage, setIsLoadingHomePage] = useState(true);
   const [isLoadingOffers, setIsLoadingOffers] = useState(true);
   const [page, setPage] = useState([]);
+  const pageNumber =
+    params.page &&
+    Number(params.page) <= page.length &&
+    Number(params.page) >= 1
+      ? Number(params.page)
+      : Number(params.page) > page.length
+      ? page.length
+      : 1;
+  const limit =
+    !isNaN(Number(params.limit)) && Number(params.limit) >= 2
+      ? params.limit
+      : 5;
   const [numberOfOffers, setNumberOfOffers] = useState(0);
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
 
@@ -70,10 +80,11 @@ const Home = ({
   }, [onboarding]); // trigger a welcome modal when the user sign up for the first time
 
   const handleChangeSelect = (e) => {
-    setLimit(e.target.value);
     const maxPage = Math.ceil(numberOfOffers / e.target.value);
     history.push(
-      pageNumber <= maxPage ? `/?page=${pageNumber}` : `/?page=${maxPage}`
+      pageNumber <= maxPage
+        ? `/?page=${pageNumber}&limit=${e.target.value}`
+        : `/?page=${maxPage}&limit=${e.target.value}`
     ); // manage the fact that when a user wants to display a high limit but is on a big page number, something is displayed instead of a blank page
   };
 
@@ -145,6 +156,7 @@ const Home = ({
                       onChange={handleChangeSelect}
                       className="select-page-nb-display"
                     >
+                      <option value="2">2</option>
                       <option value="5">5</option>
                       <option value="10">10</option>
                       <option value="15">15</option>
@@ -167,19 +179,82 @@ const Home = ({
                   </div>
                 )}
               </div>
-              <ul className="page-navigation">
-                {page.map((element, index) => {
-                  return (
+              {/* PAGINATION */}
+              {numberOfOffers !== 0 && (
+                <ul className="page-navigation">
+                  {pageNumber > 1 && (
                     <Link
-                      key={index}
-                      to={`/?page=${index + 1}`}
+                      to={`/?page=${Number(pageNumber) - 1}&limit=${limit}`}
+                    >
+                      <li>
+                        <FontAwesomeIcon
+                          icon="arrow-circle-left"
+                          className="icon-arrow-page-navigation"
+                        />{" "}
+                      </li>
+                    </Link>
+                  )}
+                  <Link to={`/?page=1&limit=${limit}`} className="page-number">
+                    <li>1</li>
+                  </Link>
+                  {pageNumber > 3 && (
+                    <li>
+                      <FontAwesomeIcon
+                        icon="ellipsis-h"
+                        className="icon-ellipsis-dots"
+                      />
+                    </li>
+                  )}
+                  {page
+                    .filter(
+                      (element) =>
+                        (element === pageNumber ||
+                          element === pageNumber + 1 ||
+                          element === pageNumber - 1) &&
+                        element !== 1 &&
+                        element !== page.length
+                    )
+                    .map((element) => {
+                      return (
+                        <Link
+                          key={element}
+                          to={`/?page=${element}&limit=${limit}`}
+                          className="page-number"
+                        >
+                          <li>{element}</li>
+                        </Link>
+                      );
+                    })}
+                  {pageNumber < page.length - 2 && (
+                    <li>
+                      <FontAwesomeIcon
+                        icon="ellipsis-h"
+                        className="icon-ellipsis-dots"
+                      />
+                    </li>
+                  )}
+                  {page.length > 1 && (
+                    <Link
+                      to={`/?page=${page.length}&limit=${limit}`}
                       className="page-number"
                     >
-                      <li>{element}</li>
+                      <li>{page.length}</li>
                     </Link>
-                  );
-                })}
-              </ul>
+                  )}
+                  {pageNumber < page.length && (
+                    <Link
+                      to={`/?page=${Number(pageNumber) + 1}&limit=${limit}`}
+                    >
+                      <li>
+                        <FontAwesomeIcon
+                          icon="arrow-circle-right"
+                          className="icon-arrow-page-navigation"
+                        />{" "}
+                      </li>
+                    </Link>
+                  )}
+                </ul>
+              )}
             </>
           )}
         </main>

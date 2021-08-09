@@ -16,12 +16,22 @@ import {
   faEye,
   faWindowClose,
   faQuestionCircle,
+  faArrowCircleRight,
+  faArrowCircleLeft,
+  faEllipsisH,
 } from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
-library.add(faSearch, faEye, faWindowClose, faQuestionCircle);
+library.add(
+  faSearch,
+  faEye,
+  faWindowClose,
+  faQuestionCircle,
+  faArrowCircleRight,
+  faArrowCircleLeft,
+  faEllipsisH
+);
 
 function App() {
-  const [limit, setLimit] = useState(5);
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isConnected, setIsConnected] = useState(Cookies.get("token") || "");
@@ -76,8 +86,6 @@ function App() {
       <Switch>
         <Route exact path="/">
           <HomePage
-            limit={limit}
-            setLimit={setLimit}
             setShowSignupModal={setShowSignupModal}
             setShowLoginModal={setShowLoginModal}
             isConnected={isConnected}
