@@ -1,8 +1,10 @@
 footer {
   width: 100%;
   text-align: center;
-  height: 10rem;
+  height: 8rem;
   background-color: #cac9c9;
+  /* position: fixed; */
+  /* bottom: 0; */
 }
 
 .center-footer {
@@ -24,4 +26,12 @@ footer {
 
 .a-footer:hover {
   text-decoration: underline;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 576px) {
+  .p-footer {
+    font-size: 1.6rem;
+  }
 }

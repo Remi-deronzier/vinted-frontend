@@ -2,7 +2,6 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 3rem;
-  /* justify-content: space-evenly; */
 }
 
 .carousel-presentation {

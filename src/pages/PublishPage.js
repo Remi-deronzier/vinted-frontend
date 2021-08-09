@@ -203,7 +203,7 @@ const PublishPage = ({ isConnected }) => {
                   className="input input-publish"
                 />
               </div>
-              <div className="publish-description">
+              <div className="publish-description ">
                 <label htmlFor="description" className="label-publish-page">
                   Décris ton article <span className="asterisk">*</span>
                 </label>

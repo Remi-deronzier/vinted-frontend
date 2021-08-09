@@ -34,19 +34,20 @@ const OfferPage = () => {
 
   const responsive = {
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+      breakpoint: { max: 3000, min: 768 },
       items: 1,
-      slidesToSlide: 1, // optional, default to 1.
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 1,
-      slidesToSlide: 1, // optional, default to 1.
+      breakpoint: { max: 768, min: 464 },
+      items: !product.product_image
+        ? 1
+        : product.product_image.length === 1
+        ? 1
+        : 2,
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 576, min: 0 },
       items: 1,
-      slidesToSlide: 1, // optional, default to 1.
     },
   };
 
@@ -57,13 +58,15 @@ const OfferPage = () => {
       <div className="container-offer-page">
         <div className="image-product">
           <Carousel
-            showDots={true}
             responsive={responsive}
             keyBoardControl={true}
             containerClass="carousel-container-image"
-            removeArrowOnDeviceType={["tablet", "mobile"]}
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item"
+            response={responsive}
+            draggable={true}
+            // additionalTransfrom={-10 * 4}
+            sliderClass="carousel-track"
           >
             {product.product_image ? (
               product.product_image.map((image, index) => {
@@ -162,46 +165,48 @@ const OfferPage = () => {
             </div>
             <div className="detail-call2">
               <p className="title-product">{product.product_name}</p>
-              <div className="product-description-fade-tooltip">
-                <div className="fade description-product">
-                  <p>{product.product_description}</p>
+              <div className="avatar-product-description">
+                <div className="product-description-fade-tooltip">
+                  <div className="fade description-product">
+                    <p>{product.product_description}</p>
+                  </div>
+                  <span data-tip={product.product_description}>
+                    {" "}
+                    <FontAwesomeIcon
+                      icon="question-circle"
+                      className="icon-info"
+                    />{" "}
+                  </span>
+                  <ReactTooltip
+                    place="right"
+                    type="dark"
+                    effect="solid"
+                    className="tooltip"
+                  />
                 </div>
-                <span data-tip={product.product_description}>
-                  {" "}
-                  <FontAwesomeIcon
-                    icon="question-circle"
-                    className="icon-info"
-                  />{" "}
-                </span>
-                <ReactTooltip
-                  place="right"
-                  type="dark"
-                  effect="solid"
-                  className="tooltip"
-                />
-              </div>
-              <div className="avatar-description">
-                {product.owner.account.avatar ? (
-                  <img
-                    src={product.owner.account.avatar.secure_url}
-                    alt="avatar"
-                    className="avatar-image"
-                  />
-                ) : (
-                  <Avatar
-                    name={product.owner.account.username}
-                    className="avatar-image"
-                    size="5rem"
-                    textSizeRatio={1.75}
-                  />
-                )}
-                <p className="avatar-username">
-                  {product.owner.account.username}
-                </p>
+                <div className="avatar-description">
+                  {product.owner.account.avatar ? (
+                    <img
+                      src={product.owner.account.avatar.secure_url}
+                      alt="avatar"
+                      className="avatar-image"
+                    />
+                  ) : (
+                    <Avatar
+                      name={product.owner.account.username}
+                      className="avatar-image"
+                      size="5rem"
+                      textSizeRatio={1.75}
+                    />
+                  )}
+                  <p className="avatar-username">
+                    {product.owner.account.username}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-          <button className="btn-green">Acheter</button>
+          <button className="btn-green btn-buy">Acheter</button>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@
 }
 
 .publish-page-h1 {
-  padding: 9rem 0 2.5rem 0;
+  padding: 15rem 0 2.5rem 0;
 }
 
 .publish-picture,
@@ -38,6 +38,15 @@
 .p-mandatory-fields {
   margin-top: 2rem;
   font-size: 1.6rem;
+}
+
+.publish-details-card,
+.publish-title,
+.publish-description,
+.publish-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .publish-title,
@@ -152,4 +161,20 @@ aside div img {
   width: 4.5rem;
   font-size: 4rem;
   margin-left: 5rem;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+  .publish-page-h1 {
+    padding-top: 20rem;
+  }
+
+  .input-publish {
+    width: 70%;
+  }
+
+  .label-publish-page {
+    width: 20%;
+  }
 }
