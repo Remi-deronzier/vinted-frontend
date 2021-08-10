@@ -138,7 +138,9 @@ const Home = ({
               <button className="btn-green btn-sort-out" onClick={handleSell}>
                 Vends maintenant
               </button>
-              <p className="discover-running">Découvrir comment ça marche</p>
+              <Link to="/how-it-works">
+                <p className="discover-running">Découvrir comment ça marche</p>
+              </Link>
             </div>
           </div>
           {isLoadingOffers ? (

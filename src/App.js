@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDebounce } from "use-debounce";
 import OfferPage from "./pages/OfferPage";
 import PaymentPage from "./pages/PaymentPage";
+import HowItWorks from "./pages/HowItWorks";
 import HomePage from "./pages/HomePage";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
@@ -106,6 +107,9 @@ function App() {
         </Route>
         <Route path="/payment">
           <PaymentPage isConnected={isConnected} />
+        </Route>
+        <Route path="/how-it-works">
+          <HowItWorks />
         </Route>
       </Switch>
       <Footer />

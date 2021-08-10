@@ -1,0 +1,90 @@
+.easter-egg-container {
+  margin-top: 16rem;
+  padding: 0 3rem;
+  box-sizing: border-box;
+}
+
+.p-congratulations {
+  text-align: center;
+  font-weight: bold;
+  line-height: 3.5rem;
+  font-size: 3rem;
+}
+
+.game-instructions {
+  display: none;
+  font-size: 2rem;
+  margin-top: 3rem;
+  text-align: center;
+  color: #383838;
+}
+
+.game-instructions-headline {
+  font-weight: bold;
+  line-height: 5rem;
+}
+
+.container-fake-game {
+  display: none;
+  margin: 5rem 0;
+}
+
+.fake-game {
+  height: 50rem;
+  width: 80rem;
+  background-color: var(--background-snake-game);
+  border: 2rem solid var(--main-green);
+  border-radius: 1rem;
+}
+
+.fake-game > p {
+  text-align: center;
+  margin-top: 15rem;
+  font-weight: bold;
+}
+
+.fake-snake {
+  margin: 3rem 2rem 0 4rem;
+  background-color: var(--red-snake);
+  width: 30rem;
+  height: 3rem;
+}
+
+.fake-apple {
+  background-color: var(--green-apple);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  margin: 10rem 2rem 0 50rem;
+}
+
+@media (max-width: 992px) {
+  .easter-egg-container {
+    margin-top: 20rem;
+  }
+
+  .game-instructions {
+    display: block;
+  }
+
+  .container-fake-game {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .fake-apple {
+    margin: 10rem 2rem 0 30rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .fake-snake {
+    width: 20rem;
+  }
+
+  .fake-apple {
+    margin: 10rem 2rem 0 10rem;
+  }
+}

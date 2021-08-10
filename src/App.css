@@ -14,6 +14,9 @@
   --height-icon-hamburger-menu: 0.15rem;
   --top-icon-hamburger-menu: 0.7rem;
   --bottom-icon-hamburger-menu: -0.7rem;
+  --background-snake-game: #ddd;
+  --green-apple: #33cc33;
+  --red-snake: #ff0000;
 }
 
 html {
