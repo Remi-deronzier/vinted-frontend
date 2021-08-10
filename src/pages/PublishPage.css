@@ -157,13 +157,20 @@ aside div img {
 }
 
 .btn-add-with-pictures-publish {
-  height: 4.5rem;
-  width: 4.5rem;
-  font-size: 4rem;
+  height: 4.5rem !important;
+  width: 4.5rem !important;
+  font-size: 4rem !important;
   margin-left: 5rem;
 }
 
 /* RESPONSIVE */
+
+@media (max-width: 1260px) {
+  aside div {
+    width: 15rem;
+    height: 15rem;
+  }
+}
 
 @media (max-width: 992px) {
   .publish-page-h1 {
@@ -176,5 +183,34 @@ aside div img {
 
   .label-publish-page {
     width: 20%;
+  }
+
+  aside div {
+    width: 12rem;
+    height: 12rem;
+  }
+}
+
+@media (max-width: 768px) {
+  aside {
+    flex-wrap: wrap;
+  }
+
+  aside div {
+    width: 18rem;
+    height: 18rem;
+    margin: 0.5rem 0.5rem;
+  }
+
+  .btn-add-with-pictures-publish {
+    margin-right: 2rem;
+    margin-left: 1rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  aside div {
+    width: 12rem;
+    height: 12rem;
   }
 }
