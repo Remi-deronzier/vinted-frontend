@@ -1,12 +1,13 @@
 import "./HamburgerMenu.css";
+
 import { Link } from "react-router-dom";
 
-function HamburgerMenu({
+const HamburgerMenu = ({
   isConnected,
   handleLoginModalTrue,
   handleSignupModalTrue,
   handleLogout,
-}) {
+}) => {
   return (
     <div className="navigation">
       <input type="checkbox" id="checkbox" className="navigation-checkbox" />
@@ -58,6 +59,6 @@ function HamburgerMenu({
       </div>
     </div>
   );
-}
+};
 
 export default HamburgerMenu;

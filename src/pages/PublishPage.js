@@ -1,12 +1,15 @@
-import LoaderSubmission from "../Components/LoaderSubmission";
-import "./PublishPage.css";
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+
+import LoaderSubmission from "../Components/LoaderSubmission";
+
+import "./PublishPage.css";
+
 import { Redirect, useHistory } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const PublishPage = ({ isConnected }) => {
+const PublishPage = ({ isConnected, handleLoaderSubmission }) => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -28,7 +31,7 @@ const PublishPage = ({ isConnected }) => {
     e.preventDefault();
     const formData = new FormData();
     files.forEach((file, index) => {
-      formData.append(`picture${index + 1}`, file);
+      formData.append(`picture${index + 1}`, file); // upload several pictures
     });
     formData.append("title", title);
     formData.append("description", description);
@@ -39,15 +42,7 @@ const PublishPage = ({ isConnected }) => {
     formData.append("size", size);
     formData.append("color", color);
     try {
-      // Disable the submit button
-      document
-        .querySelector("#submit-btn")
-        .setAttribute("disabled", "disabled");
-      // Launch the loader
-      document
-        .querySelector(".loader-circle")
-        .classList.remove("loader-circle-hidden");
-      // axios
+      handleLoaderSubmission();
       const response = await axios.post(
         "https://vinted-api-remi.herokuapp.com/offer/publish",
         formData,
@@ -58,12 +53,6 @@ const PublishPage = ({ isConnected }) => {
           },
         }
       );
-      // Enable the button after the request
-      document.querySelector("#submit-btn").removeAttribute("disabled");
-      // Stop the loader
-      document
-        .querySelector(".loader-circle")
-        .classList.add("loader-circle-hidden");
       history.push(`/offer/${response.data._id}`);
     } catch (error) {
       alert("an error has occured");
@@ -72,10 +61,10 @@ const PublishPage = ({ isConnected }) => {
 
   const onDrop = useCallback(
     (acceptedFiles) => {
-      const newFiles = [...files, ...acceptedFiles];
+      const newFiles = [...files, ...acceptedFiles]; // upload several pictures
       setFiles(newFiles);
-      const currentPreview = acceptedFiles.map((file) =>
-        URL.createObjectURL(file)
+      const currentPreview = acceptedFiles.map(
+        (file) => URL.createObjectURL(file) // preview all the pictures selected
       );
       const newPreview = [...preview, ...currentPreview];
       setPreview(newPreview);
@@ -86,8 +75,8 @@ const PublishPage = ({ isConnected }) => {
   const { getRootProps, getInputProps } = useDropzone(
     {
       onDrop,
-      disabled: files.length > 4,
-      maxFiles: 5 - files.length,
+      disabled: files.length > 4, // max upload pictures: 5 pictures
+      maxFiles: 5 - files.length, // SAME
       accept: "image/jpeg, image/png",
     },
     [files]

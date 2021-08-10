@@ -46,10 +46,11 @@
 }
 
 .btn-payment {
-  width: 100%;
-  font-size: 1.8rem;
-  margin-top: 3rem;
-  height: 5rem;
+  width: 100% !important;
+  font-size: 1.8rem !important;
+  margin-top: 3rem !important;
+  height: 5rem !important;
+  position: relative !important;
 }
 
 .payment-description {

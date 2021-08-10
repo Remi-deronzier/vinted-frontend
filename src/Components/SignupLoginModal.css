@@ -64,12 +64,11 @@
 }
 
 .btn-signup-login {
-  font-family: "Maison Neue";
-  width: 100%;
-  font-size: 1.6rem;
-  position: relative;
-  height: 4.5rem;
-  margin-top: 3rem;
+  width: 100% !important;
+  font-size: 1.6rem !important;
+  position: relative !important;
+  height: 4.5rem !important;
+  margin-top: 3rem !important;
 }
 
 .toggle-signup-loggin {

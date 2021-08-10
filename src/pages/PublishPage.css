@@ -78,10 +78,10 @@
 }
 
 .btn-add-publish {
-  font-size: 2rem;
-  height: auto;
-  padding: 1rem 2rem;
-  position: relative;
+  font-size: 2rem !important;
+  height: auto !important;
+  padding: 1rem 2rem !important;
+  position: relative !important;
 }
 
 .div-btn-add-publish {
@@ -151,9 +151,9 @@ aside div img {
 }
 
 .btn-add-no-pictures-publish {
-  font-size: 1.8rem;
-  padding: 1.5rem;
-  height: auto;
+  font-size: 1.8rem !important;
+  padding: 1.5rem !important;
+  height: auto !important;
 }
 
 .btn-add-with-pictures-publish {

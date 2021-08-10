@@ -1,15 +1,19 @@
-import LoaderSubmission from "./LoaderSubmission";
 import { useState, useEffect, useCallback } from "react";
+
+import LoaderSubmission from "./LoaderSubmission";
+
+import "./SignupLoginModal.css";
+
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDropzone } from "react-dropzone";
-import "./SignupLoginModal.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SignupModal = ({
   setShowSignupModal,
   setShowLoginModal,
   handleLoginSignup,
+  handleLoaderSubmission,
 }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -27,14 +31,7 @@ const SignupModal = ({
     formData.append("username", username);
     formData.append("password", password);
     try {
-      // Disable the submit button
-      document
-        .querySelector("#submit-btn")
-        .setAttribute("disabled", "disabled");
-      // Launch the loader
-      document
-        .querySelector(".loader-circle")
-        .classList.remove("loader-circle-hidden");
+      handleLoaderSubmission();
       const response = await axios.post(
         "https://vinted-api-remi.herokuapp.com/user/signup",
         formData
@@ -92,7 +89,7 @@ const SignupModal = ({
   }, []);
 
   useEffect(() => {
-    const modal = document.getElementById("modal");
+    const modal = document.getElementById("modal"); // Close modal when the user clicks outside the modal
     window.onclick = function (event) {
       if (event.target === modal) {
         setShowSignupModal(false);

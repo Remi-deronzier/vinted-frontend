@@ -1,9 +1,12 @@
-import { Link, useLocation, useHistory } from "react-router-dom";
-import Product from "../Components/Product";
-import "./HomePage.css";
-import Loader from "../Components/Loader";
-import welcomeImage from "../assets/images/welcome-image-crop.png";
 import { useState, useEffect } from "react";
+
+import Product from "../Components/Product";
+import Loader from "../Components/Loader";
+
+import "./HomePage.css";
+import welcomeImage from "../assets/images/welcome-image-crop.png";
+
+import { Link, useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
 import * as qs from "qs";
 import Modal from "react-modal";
@@ -17,13 +20,19 @@ const Home = ({
   sort,
   rangeValues,
 }) => {
-  const location = useLocation();
-  const params = qs.parse(location.search.slice(1));
-  const onboarding = params.onboarding;
   const [data, setData] = useState({});
   const [isLoadingHomePage, setIsLoadingHomePage] = useState(true);
   const [isLoadingOffers, setIsLoadingOffers] = useState(true);
   const [page, setPage] = useState([]);
+  const [numberOfOffers, setNumberOfOffers] = useState(0);
+  const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+
+  const location = useLocation();
+  const params = qs.parse(location.search.slice(1));
+
+  const onboarding = params.onboarding;
+  const paymentSuccessful = params.paymentSuccessful;
   const pageNumber =
     params.page &&
     Number(params.page) <= page.length &&
@@ -31,13 +40,11 @@ const Home = ({
       ? Number(params.page)
       : Number(params.page) > page.length
       ? page.length
-      : 1;
+      : 1; // prevent user from entering bad page numbers in the URL
   const limit =
     !isNaN(Number(params.limit)) && Number(params.limit) >= 2
       ? params.limit
-      : 5;
-  const [numberOfOffers, setNumberOfOffers] = useState(0);
-  const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
+      : 5; // prevent user from entering bad limit numbers in the URL
 
   let history = useHistory();
 
@@ -62,7 +69,7 @@ const Home = ({
         const numberOfPages = Math.ceil(response.data.count / limit);
         const arrayPage = new Array(numberOfPages)
           .fill(0)
-          .map((element, index) => index + 1);
+          .map((element, index) => index + 1); // [1, 2 .... last page]
         setPage(arrayPage);
         setNumberOfOffers(response.data.count);
         document.title = "Vinted | La boutique de Rémi";
@@ -79,6 +86,12 @@ const Home = ({
     }
   }, [onboarding]); // trigger a welcome modal when the user sign up for the first time
 
+  useEffect(() => {
+    if (paymentSuccessful) {
+      setIsPaymentModalOpen(true);
+    }
+  }, [paymentSuccessful]); // trigger a modal when the payment was successful
+
   const handleChangeSelect = (e) => {
     const maxPage = Math.ceil(numberOfOffers / e.target.value);
     history.push(
@@ -88,13 +101,18 @@ const Home = ({
     ); // manage the fact that when a user wants to display a high limit but is on a big page number, something is displayed instead of a blank page
   };
 
-  const handleCloseModal = () => {
+  const handleWelcomeModalClose = () => {
     setIsWelcomeModalOpen(false);
+  };
+
+  const handlePaymentModalClose = () => {
+    setIsPaymentModalOpen(false);
   };
 
   const handleAfterOpenFunc = () => {
     setTimeout(() => {
       setIsWelcomeModalOpen(false);
+      setIsPaymentModalOpen(false);
     }, 7000);
   };
 
@@ -110,16 +128,25 @@ const Home = ({
     <>
       <Modal
         isOpen={isWelcomeModalOpen}
-        onRequestClose={handleCloseModal}
+        onRequestClose={handleWelcomeModalClose}
         onAfterOpen={handleAfterOpenFunc}
         ariaHideApp={false}
-        className="welcome-modal"
+        className="home-page-modal"
       >
         Bonjour{" "}
         <span className="username-welcome-modal">
           {Cookies.get("username")}
         </span>
         , bienvenue sur Vinted ! 🎉
+      </Modal>
+      <Modal
+        isOpen={isPaymentModalOpen}
+        onRequestClose={handlePaymentModalClose}
+        onAfterOpen={handleAfterOpenFunc}
+        ariaHideApp={false}
+        className="home-page-modal"
+      >
+        Paiement effectué avec succès ! 😊
       </Modal>
       {isLoadingHomePage ? (
         <Loader className="container-loader-main" />
@@ -135,7 +162,11 @@ const Home = ({
               <p className="ready-to-sort-out">
                 Prêts à faire du tri dans vos placards ?
               </p>
-              <button className="btn-green btn-sort-out" onClick={handleSell}>
+              <button
+                className="btn-green"
+                id="btn-sort-out"
+                onClick={handleSell}
+              >
                 Vends maintenant
               </button>
               <Link to="/how-it-works">

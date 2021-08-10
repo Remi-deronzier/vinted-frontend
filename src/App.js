@@ -1,7 +1,5 @@
-import "./App.css";
-import "./assets/css/fonts.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useDebounce } from "use-debounce";
+import { useState } from "react";
+
 import OfferPage from "./pages/OfferPage";
 import PaymentPage from "./pages/PaymentPage";
 import HowItWorks from "./pages/HowItWorks";
@@ -11,7 +9,13 @@ import Footer from "./Components/Footer";
 import SignupModal from "./Components/SignupModal";
 import LoginModal from "./Components/LoginModal";
 import PublishPage from "./pages/PublishPage";
-import { useState } from "react";
+
+import "./App.css";
+import "./assets/css/fonts.css";
+
+import Cookies from "js-cookie";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useDebounce } from "use-debounce";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faSearch,
@@ -22,7 +26,6 @@ import {
   faArrowCircleLeft,
   faEllipsisH,
 } from "@fortawesome/free-solid-svg-icons";
-import Cookies from "js-cookie";
 library.add(
   faSearch,
   faEye,
@@ -33,16 +36,17 @@ library.add(
   faEllipsisH
 );
 
-function App() {
+const App = () => {
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isConnected, setIsConnected] = useState(Cookies.get("token") || "");
   const [search, setSearch] = useState("");
-  const [debouncedSearch] = useDebounce(search, 1000);
   const [rangeValues, setRangeValues] = useState([0, 300]);
   const [finalRangeValues, setFinalRangeValues] = useState([0, 300]);
-  const [debouncedFinalRangeValues] = useDebounce(finalRangeValues, 500);
   const [sort, setSort] = useState(false);
+
+  const [debouncedSearch] = useDebounce(search, 1000);
+  const [debouncedFinalRangeValues] = useDebounce(finalRangeValues, 500);
   const [debouncedSort] = useDebounce(sort, 500);
 
   const handleLoginSignup = (token, avatar, username) => {
@@ -56,6 +60,13 @@ function App() {
     setIsConnected(Cookies.get("token"));
   };
 
+  const handleLoaderSubmission = () => {
+    document.querySelector("#submit-btn").setAttribute("disabled", "disabled"); // Disable the submit button;
+    document
+      .querySelector(".loader-circle")
+      .classList.remove("loader-circle-hidden"); // Launch the loader
+  };
+
   return (
     <Router>
       {showSignupModal && (
@@ -63,6 +74,7 @@ function App() {
           setShowSignupModal={setShowSignupModal}
           setShowLoginModal={setShowLoginModal}
           handleLoginSignup={handleLoginSignup}
+          handleLoaderSubmission={handleLoaderSubmission}
         />
       )}
       {showLoginModal && (
@@ -70,6 +82,7 @@ function App() {
           setShowLoginModal={setShowLoginModal}
           setShowSignupModal={setShowSignupModal}
           handleLoginSignup={handleLoginSignup}
+          handleLoaderSubmission={handleLoaderSubmission}
         />
       )}
       <Header
@@ -103,10 +116,16 @@ function App() {
           />
         </Route>
         <Route path="/publish">
-          <PublishPage isConnected={isConnected} />
+          <PublishPage
+            isConnected={isConnected}
+            handleLoaderSubmission={handleLoaderSubmission}
+          />
         </Route>
         <Route path="/payment">
-          <PaymentPage isConnected={isConnected} />
+          <PaymentPage
+            isConnected={isConnected}
+            handleLoaderSubmission={handleLoaderSubmission}
+          />
         </Route>
         <Route path="/how-it-works">
           <HowItWorks />
@@ -115,6 +134,6 @@ function App() {
       <Footer />
     </Router>
   );
-}
+};
 
 export default App;

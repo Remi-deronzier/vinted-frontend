@@ -1,6 +1,8 @@
 import { currencyFormat } from "../helpers/helper";
+
 import "./Product.css";
 import fillImage from "../assets/images/icon-clothes.png";
+
 import Avatar from "react-avatar";
 
 const Product = ({ offer }) => {

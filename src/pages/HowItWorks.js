@@ -1,8 +1,10 @@
-import "./HowItWorks.css";
-import SnakeGame from "../Components/SnakeGame";
 import { useEffect } from "react";
 
-function HowItWorks() {
+import SnakeGame from "../Components/SnakeGame";
+
+import "./HowItWorks.css";
+
+const HowItWorks = () => {
   useEffect(() => {
     document.title = "À propos";
   }, []);
@@ -10,7 +12,7 @@ function HowItWorks() {
   return (
     <div className="easter-egg-container">
       <p className="p-congratulations">Félicitations 🎉!</p>
-      <p className="p-congratulations">Vous avez trouvé l'Easter Egg</p>
+      <p className="p-congratulations">Tu as trouvé l'Easter Egg</p>
       <div className="game-instructions">
         <p className="game-instructions-headline">
           Pour pouvoir jouer au jeu du serpent, il faut :
@@ -30,6 +32,6 @@ function HowItWorks() {
       <SnakeGame />
     </div>
   );
-}
+};
 
 export default HowItWorks;

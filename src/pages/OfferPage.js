@@ -1,20 +1,24 @@
-import { useParams, useHistory } from "react-router-dom";
-import "./OfferPage.css";
+import { useState, useEffect } from "react";
+
 import Loader from "../Components/Loader";
 import { currencyFormat } from "../helpers/helper";
-import { useState, useEffect } from "react";
+
+import "./OfferPage.css";
+import fillImage from "../assets/images/icon-clothes.png";
+
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import ReactTooltip from "react-tooltip";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import fillImage from "../assets/images/icon-clothes.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Avatar from "react-avatar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const OfferPage = ({ isConnected, setShowLoginModal }) => {
-  const { id } = useParams();
   const [product, setProduct] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
+  const { id } = useParams();
 
   let history = useHistory();
 
@@ -35,6 +39,7 @@ const OfferPage = ({ isConnected, setShowLoginModal }) => {
   }, [id]);
 
   const responsive = {
+    // responsive for the carousel
     desktop: {
       breakpoint: { max: 3000, min: 768 },
       items: 1,
@@ -61,9 +66,6 @@ const OfferPage = ({ isConnected, setShowLoginModal }) => {
     }
   };
 
-  // console.log(history);
-  // console.log(product);
-
   return isLoading ? (
     <Loader className="container-loader-main" />
   ) : (
@@ -78,7 +80,7 @@ const OfferPage = ({ isConnected, setShowLoginModal }) => {
             itemClass="carousel-item"
             response={responsive}
             draggable={true}
-            // additionalTransfrom={-10 * 4}
+            // additionalTransfrom={-10 * 4} // not working ???
             sliderClass="carousel-track"
           >
             {product.product_image ? (

@@ -1,14 +1,18 @@
-import LoaderSubmission from "./LoaderSubmission";
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import LoaderSubmission from "./LoaderSubmission";
+
 import "./SignupLoginModal.css";
+
+import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const LoginModal = ({
   setShowLoginModal,
   setShowSignupModal,
   handleLoginSignup,
+  handleLoaderSubmission,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,14 +26,7 @@ const LoginModal = ({
       password: password,
     };
     try {
-      // Disable the submit button
-      document
-        .querySelector("#submit-btn")
-        .setAttribute("disabled", "disabled");
-      // Launch the loader
-      document
-        .querySelector(".loader-circle")
-        .classList.remove("loader-circle-hidden");
+      handleLoaderSubmission();
       const response = await axios.post(
         "https://vinted-api-remi.herokuapp.com/user/login",
         data
@@ -83,7 +80,7 @@ const LoginModal = ({
   }, []);
 
   useEffect(() => {
-    const modal = document.getElementById("modal");
+    const modal = document.getElementById("modal"); // Close modal when the user clicks outside the modal
     window.onclick = function (event) {
       if (event.target === modal) {
         setShowLoginModal(false);

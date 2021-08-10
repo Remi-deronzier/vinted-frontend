@@ -1,12 +1,14 @@
-import logoVinted from "../assets/images/vinted-logo.png";
-import { Link } from "react-router-dom";
-import "./Header.css";
 import HamburgerMenu from "./HamburgerMenu";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import "./Header.css";
+import logoVinted from "../assets/images/vinted-logo.png";
+
+import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import { Range, getTrackBackground } from "react-range";
 import Avatar from "react-avatar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = ({
   setShowSignupModal,
@@ -52,6 +54,14 @@ const Header = ({
 
   const handleSort = (event) => {
     setSort(event.target.checked);
+  };
+
+  const handleSell = () => {
+    if (isConnected) {
+      history.push("/publish");
+    } else {
+      setShowLoginModal(true);
+    }
   };
 
   return (
@@ -165,14 +175,9 @@ const Header = ({
           )}
         </div>
         <div className="header-call2">
-          <Link to={isConnected && "/publish"}>
-            <button
-              className="btn-send-clothes btn-green"
-              onClick={!isConnected ? handleLoginModalTrue : undefined}
-            >
-              Vends tes articles
-            </button>
-          </Link>
+          <button className="btn-send-clothes btn-green" onClick={handleSell}>
+            Vends tes articles
+          </button>
         </div>
       </div>
     </header>

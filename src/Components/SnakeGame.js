@@ -1,8 +1,11 @@
-import "./SnakeGame.css";
 import { useEffect } from "react";
 
-function SnakeGame() {
+import "./SnakeGame.css";
+
+const SnakeGame = () => {
   useEffect(() => {
+    // Old way of programming
+
     var canvasWidth = 900;
     var canvasHeight = 500;
     var blockSize = 30;
@@ -295,11 +298,14 @@ function SnakeGame() {
       let canvas = document.getElementById("canvas-snake");
       let containerSnake = document.querySelector(".snake-container");
       if (containerSnake) {
-        containerSnake.removeChild(canvas);
+        containerSnake.removeChild(canvas); // delete canvas: remove the game grid
       }
+      document.onkeydown = function (e) {
+        return true; // reactivate keyboard
+      };
     };
   }, []);
   return <div className="snake-container"></div>;
-}
+};
 
 export default SnakeGame;
