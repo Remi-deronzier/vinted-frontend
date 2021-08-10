@@ -169,7 +169,18 @@ h1 {
 
 @media (max-width: 768px) {
   .call-to-action-send {
-    display: none;
+    left: 5%;
+    width: 80%;
+    height: 14rem;
+  }
+
+  #btn-sort-out {
+    font-size: 1.6rem;
+    margin: 2rem 0 1rem 0;
+  }
+
+  .ready-to-sort-out {
+    font-size: 2rem;
   }
 
   .carousel-presentation {
@@ -185,6 +196,16 @@ h1 {
   .product {
     width: 100%;
     margin-bottom: 3rem;
+  }
+
+  .call-to-action-send {
+    top: calc(var(--height--header) + 8rem);
+    padding: 2rem;
+    width: 90%;
+  }
+
+  .ready-to-sort-out {
+    font-size: 1.8rem;
   }
 
   .product:not(:nth-child(2n + 2)) {
