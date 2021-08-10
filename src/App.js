@@ -3,6 +3,7 @@ import "./assets/css/fonts.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDebounce } from "use-debounce";
 import OfferPage from "./pages/OfferPage";
+import PaymentPage from "./pages/PaymentPage";
 import HomePage from "./pages/HomePage";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
@@ -56,19 +57,6 @@ function App() {
 
   return (
     <Router>
-      <Header
-        setShowSignupModal={setShowSignupModal}
-        setShowLoginModal={setShowLoginModal}
-        isConnected={isConnected}
-        setIsConnected={setIsConnected}
-        search={search}
-        setSearch={setSearch}
-        setRangeValues={setRangeValues}
-        rangeValues={rangeValues}
-        setFinalRangeValues={setFinalRangeValues}
-        sort={sort}
-        setSort={setSort}
-      />
       {showSignupModal && (
         <SignupModal
           setShowSignupModal={setShowSignupModal}
@@ -83,6 +71,19 @@ function App() {
           handleLoginSignup={handleLoginSignup}
         />
       )}
+      <Header
+        setShowSignupModal={setShowSignupModal}
+        setShowLoginModal={setShowLoginModal}
+        isConnected={isConnected}
+        setIsConnected={setIsConnected}
+        search={search}
+        setSearch={setSearch}
+        setRangeValues={setRangeValues}
+        rangeValues={rangeValues}
+        setFinalRangeValues={setFinalRangeValues}
+        sort={sort}
+        setSort={setSort}
+      />
       <Switch>
         <Route exact path="/">
           <HomePage
@@ -95,10 +96,16 @@ function App() {
           />
         </Route>
         <Route path="/offer/:id">
-          <OfferPage />
+          <OfferPage
+            isConnected={isConnected}
+            setShowLoginModal={setShowLoginModal}
+          />
         </Route>
         <Route path="/publish">
           <PublishPage isConnected={isConnected} />
+        </Route>
+        <Route path="/payment">
+          <PaymentPage isConnected={isConnected} />
         </Route>
       </Switch>
       <Footer />

@@ -2,7 +2,6 @@ import LoaderSubmission from "../Components/LoaderSubmission";
 import "./PublishPage.css";
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import Loader from "../Components/Loader";
 import { Redirect, useHistory } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,13 +17,11 @@ const PublishPage = ({ isConnected }) => {
   const [city, setCity] = useState("");
   const [files, setFiles] = useState([]);
   const [preview, setPreview] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   let history = useHistory();
 
   useEffect(() => {
     document.title = "Vends ton article - Vinted";
-    setIsLoading(false);
   }, []);
 
   const handleSubmit = async (e) => {
@@ -142,180 +139,176 @@ const PublishPage = ({ isConnected }) => {
   };
 
   return isConnected ? (
-    isLoading ? (
-      <Loader className="container-loader-main" />
-    ) : (
-      <div className="publish-page">
-        <div className="container">
-          <h1 className="publish-page-h1">Vends ton article</h1>
-          <form onSubmit={handleSubmit}>
-            <div className="publish-picture">
-              <p className="p-publish-picture">Ajoute jusqu'à 5 photos</p>
-              <div
-                {...getRootProps({
-                  className:
-                    preview.length === 0
-                      ? "dropzone-no-pictures"
-                      : "dropzone-with-pictures",
+    <div className="publish-page">
+      <div className="container">
+        <h1 className="publish-page-h1">Vends ton article</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="publish-picture">
+            <p className="p-publish-picture">Ajoute jusqu'à 5 photos</p>
+            <div
+              {...getRootProps({
+                className:
+                  preview.length === 0
+                    ? "dropzone-no-pictures"
+                    : "dropzone-with-pictures",
+              })}
+            >
+              <input {...getInputProps()} />{" "}
+              <aside>
+                {preview.map((url, index) => {
+                  return (
+                    <div key={index}>
+                      <img src={url} alt={files[index].name} />
+                      <FontAwesomeIcon
+                        icon="window-close"
+                        className="btn-close"
+                        onClick={() => handleDeletePicture(index)}
+                      />
+                    </div>
+                  );
                 })}
-              >
-                <input {...getInputProps()} />{" "}
-                <aside>
-                  {preview.map((url, index) => {
-                    return (
-                      <div key={index}>
-                        <img src={url} alt={files[index].name} />
-                        <FontAwesomeIcon
-                          icon="window-close"
-                          className="btn-close"
-                          onClick={() => handleDeletePicture(index)}
-                        />
-                      </div>
-                    );
-                  })}
-                </aside>
-                {files.length <= 4 && (
-                  <button
-                    type="button"
-                    className={
-                      preview.length === 0
-                        ? "btn-white-border-green btn-add-no-pictures-publish"
-                        : "btn-white-border-green btn-add-with-pictures-publish"
-                    }
-                  >
-                    {preview.length === 0 ? "+ Ajoute des photos" : "+"}
-                  </button>
-                )}
-              </div>
+              </aside>
+              {files.length <= 4 && (
+                <button
+                  type="button"
+                  className={
+                    preview.length === 0
+                      ? "btn-white-border-green btn-add-no-pictures-publish"
+                      : "btn-white-border-green btn-add-with-pictures-publish"
+                  }
+                >
+                  {preview.length === 0 ? "+ Ajoute des photos" : "+"}
+                </button>
+              )}
             </div>
-            <div className="publish-title-description">
-              <div className="publish-title">
-                <label className="label-publish-page" htmlFor="title">
-                  Titre <span className="asterisk">*</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Ex : chemise"
-                  id="title"
-                  value={title}
-                  onChange={handleChangeTitle}
-                  required
-                  className="input input-publish"
-                />
-              </div>
-              <div className="publish-description ">
-                <label htmlFor="description" className="label-publish-page">
-                  Décris ton article <span className="asterisk">*</span>
-                </label>
-                <textarea
-                  type="text"
-                  placeholder="Ex : porté quelque fois, taille correctement"
-                  id="description"
-                  value={description}
-                  onChange={handleChangeDescription}
-                  required
-                  className="input input-publish textarea-description"
-                />
-              </div>
-            </div>
-            <div className="publish-details">
-              <div className="publish-details-card">
-                <label className="label-publish-page" htmlFor="title">
-                  Marque
-                </label>
-                <input
-                  type="text"
-                  placeholder="Ex : Zara"
-                  id="brand"
-                  value={brand}
-                  onChange={handleChangeBrand}
-                  className="input input-publish"
-                />
-              </div>
-              <div className="publish-details-card">
-                <label htmlFor="size" className="label-publish-page">
-                  Taille
-                </label>
-                <input
-                  type="text"
-                  placeholder="Ex : L/40/12"
-                  id="size"
-                  value={size}
-                  onChange={handleChangeSize}
-                  className="input input-publish"
-                />
-              </div>
-              <div className="publish-details-card">
-                <label htmlFor="color" className="label-publish-page">
-                  Couleur
-                </label>
-                <input
-                  type="text"
-                  placeholder="Ex : Fushia"
-                  id="color"
-                  value={color}
-                  onChange={handleChangeColor}
-                  className="input input-publish"
-                />
-              </div>
-              <div className="publish-details-card">
-                <label htmlFor="condition" className="label-publish-page">
-                  État
-                </label>
-                <input
-                  type="text"
-                  placeholder="Ex : Neuf avec étiquette"
-                  id="condition"
-                  value={condition}
-                  onChange={handleChangeCondition}
-                  className="input input-publish"
-                />
-              </div>
-              <div className="publish-details-card">
-                <label htmlFor="city" className="label-publish-page">
-                  Lieu
-                </label>
-                <input
-                  type="text"
-                  placeholder="Ex : Paris"
-                  id="city"
-                  value={city}
-                  onChange={handleChangeLocation}
-                  className="input input-publish"
-                />
-              </div>
-            </div>
-            <div className="publish-price">
-              <label htmlFor="price" className="label-publish-page">
-                Prix <span className="asterisk">*</span>
+          </div>
+          <div className="publish-title-description">
+            <div className="publish-title">
+              <label className="label-publish-page" htmlFor="title">
+                Titre <span className="asterisk">*</span>
               </label>
               <input
-                type="number"
-                placeholder="Ex : 8,00 €"
-                id="price"
-                value={price}
-                onChange={handleChangePrice}
+                type="text"
+                placeholder="Ex : chemise"
+                id="title"
+                value={title}
+                onChange={handleChangeTitle}
                 required
                 className="input input-publish"
               />
             </div>
-            <div className="div-btn-add-publish">
-              <p className="p-mandatory-fields">
-                <span className="asterisk">* </span>Champs obligatoires
-              </p>
-              <button
-                type="submit"
-                className="btn-green btn-add-publish"
-                id="submit-btn"
-              >
-                Ajouter
-                <LoaderSubmission />
-              </button>
+            <div className="publish-description ">
+              <label htmlFor="description" className="label-publish-page">
+                Décris ton article <span className="asterisk">*</span>
+              </label>
+              <textarea
+                type="text"
+                placeholder="Ex : porté quelque fois, taille correctement"
+                id="description"
+                value={description}
+                onChange={handleChangeDescription}
+                required
+                className="input input-publish textarea-description"
+              />
             </div>
-          </form>
-        </div>
+          </div>
+          <div className="publish-details">
+            <div className="publish-details-card">
+              <label className="label-publish-page" htmlFor="title">
+                Marque
+              </label>
+              <input
+                type="text"
+                placeholder="Ex : Zara"
+                id="brand"
+                value={brand}
+                onChange={handleChangeBrand}
+                className="input input-publish"
+              />
+            </div>
+            <div className="publish-details-card">
+              <label htmlFor="size" className="label-publish-page">
+                Taille
+              </label>
+              <input
+                type="text"
+                placeholder="Ex : L/40/12"
+                id="size"
+                value={size}
+                onChange={handleChangeSize}
+                className="input input-publish"
+              />
+            </div>
+            <div className="publish-details-card">
+              <label htmlFor="color" className="label-publish-page">
+                Couleur
+              </label>
+              <input
+                type="text"
+                placeholder="Ex : Fushia"
+                id="color"
+                value={color}
+                onChange={handleChangeColor}
+                className="input input-publish"
+              />
+            </div>
+            <div className="publish-details-card">
+              <label htmlFor="condition" className="label-publish-page">
+                État
+              </label>
+              <input
+                type="text"
+                placeholder="Ex : Neuf avec étiquette"
+                id="condition"
+                value={condition}
+                onChange={handleChangeCondition}
+                className="input input-publish"
+              />
+            </div>
+            <div className="publish-details-card">
+              <label htmlFor="city" className="label-publish-page">
+                Lieu
+              </label>
+              <input
+                type="text"
+                placeholder="Ex : Paris"
+                id="city"
+                value={city}
+                onChange={handleChangeLocation}
+                className="input input-publish"
+              />
+            </div>
+          </div>
+          <div className="publish-price">
+            <label htmlFor="price" className="label-publish-page">
+              Prix <span className="asterisk">*</span>
+            </label>
+            <input
+              type="number"
+              placeholder="Ex : 8,00 €"
+              id="price"
+              value={price}
+              onChange={handleChangePrice}
+              required
+              className="input input-publish"
+            />
+          </div>
+          <div className="div-btn-add-publish">
+            <p className="p-mandatory-fields">
+              <span className="asterisk">* </span>Champs obligatoires
+            </p>
+            <button
+              type="submit"
+              className="btn-green btn-add-publish"
+              id="submit-btn"
+            >
+              Ajouter
+              <LoaderSubmission />
+            </button>
+          </div>
+        </form>
       </div>
-    )
+    </div>
   ) : (
     <Redirect to="/" />
   );

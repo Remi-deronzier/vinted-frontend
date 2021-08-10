@@ -1,0 +1,108 @@
+.container-form-payment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--grey-background);
+}
+
+.payment-form {
+  margin: 16rem 0 5rem 0;
+  width: 60vw;
+  background-color: #fff;
+  padding: 2rem;
+  box-sizing: border-box;
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
+}
+
+.payment-form > h2 {
+  color: #969696;
+  font-weight: 500;
+  margin-bottom: 3rem;
+}
+
+.payment-details {
+  padding-bottom: 3rem;
+  border-bottom: 0.1rem solid var(--grey-border-bottom);
+  color: #727171;
+}
+
+.payment-summary {
+  color: var(--main-black);
+  margin-top: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 0.1rem solid var(--grey-border-bottom);
+}
+
+.line-payment-form {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.line-total {
+  font-weight: bold;
+  margin-bottom: 3rem;
+}
+
+.btn-payment {
+  width: 100%;
+  font-size: 1.8rem;
+  margin-top: 3rem;
+  height: 5rem;
+}
+
+.payment-description {
+  line-height: 2rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.card-element {
+  margin-top: 3rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0.5rem 0.5rem 7rem 1rem #ccc;
+}
+
+.card-element:focus {
+  border: 1px solid #000;
+}
+
+.paiement-effectue {
+  margin-top: 50rem;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+  .payment-form {
+    margin-top: 22rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .payment-form {
+    width: 70vw;
+  }
+}
+
+@media (max-width: 576px) {
+  .payment-form {
+    width: 80vw;
+  }
+}
+
+@media (min-height: 700px) {
+  .container-form-payment {
+    height: calc(100vh - 8rem);
+  }
+}
+
+@media (orientation: landscape) {
+  .container-form-payment {
+    height: auto;
+  }
+}

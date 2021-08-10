@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import "./OfferPage.css";
 import Loader from "../Components/Loader";
 import { currencyFormat } from "../helpers/helper";
@@ -11,10 +11,12 @@ import fillImage from "../assets/images/icon-clothes.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Avatar from "react-avatar";
 
-const OfferPage = () => {
+const OfferPage = ({ isConnected, setShowLoginModal }) => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
+  let history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +52,17 @@ const OfferPage = () => {
       items: 1,
     },
   };
+
+  const handleBuy = () => {
+    if (isConnected) {
+      history.push("/payment", product);
+    } else {
+      setShowLoginModal(true);
+    }
+  };
+
+  // console.log(history);
+  // console.log(product);
 
   return isLoading ? (
     <Loader className="container-loader-main" />
@@ -206,7 +219,9 @@ const OfferPage = () => {
               </div>
             </div>
           </div>
-          <button className="btn-green btn-buy">Acheter</button>
+          <button className="btn-green btn-buy" onClick={handleBuy}>
+            Acheter
+          </button>
         </div>
       </div>
     </div>

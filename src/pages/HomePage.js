@@ -88,10 +88,6 @@ const Home = ({
     ); // manage the fact that when a user wants to display a high limit but is on a big page number, something is displayed instead of a blank page
   };
 
-  const handleLoginModalTrue = () => {
-    setShowLoginModal(true);
-  };
-
   const handleCloseModal = () => {
     setIsWelcomeModalOpen(false);
   };
@@ -100,6 +96,14 @@ const Home = ({
     setTimeout(() => {
       setIsWelcomeModalOpen(false);
     }, 7000);
+  };
+
+  const handleSell = () => {
+    if (isConnected) {
+      history.push("/publish");
+    } else {
+      setShowLoginModal(true);
+    }
   };
 
   return (
@@ -131,14 +135,9 @@ const Home = ({
               <p className="ready-to-sort-out">
                 Prêts à faire du tri dans vos placards ?
               </p>
-              <Link to="/publish">
-                <button
-                  className="btn-green btn-sort-out"
-                  onClick={!isConnected ? handleLoginModalTrue : undefined}
-                >
-                  Vends maintenant
-                </button>
-              </Link>
+              <button className="btn-green btn-sort-out" onClick={handleSell}>
+                Vends maintenant
+              </button>
               <p className="discover-running">Découvrir comment ça marche</p>
             </div>
           </div>
