@@ -10,7 +10,11 @@ const stripePromise = loadStripe(
   "pk_test_51JMdcDITVWFkdDVZu0Th9OcJZUjJzK52rl4M3D9pJcY6aJFdt2DVXEDDNtkS64SRya9DHu78uQp9f6l8pTH4gNEb00T8OPmEOW"
 );
 
-function PaymentPage({ isConnected, handleLoaderSubmission }) {
+function PaymentPage({
+  isConnected,
+  handleLoaderSubmission,
+  handleLoaderEnding,
+}) {
   const location = useLocation();
   const product = location.state;
 
@@ -24,6 +28,7 @@ function PaymentPage({ isConnected, handleLoaderSubmission }) {
         <CheckoutForm
           product={product}
           handleLoaderSubmission={handleLoaderSubmission}
+          handleLoaderEnding={handleLoaderEnding}
         />
       </Elements>
     </div>

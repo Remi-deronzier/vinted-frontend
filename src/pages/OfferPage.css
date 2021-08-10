@@ -1,7 +1,3 @@
-.offer-page {
-  background-color: var(--grey-background);
-}
-
 .container-offer-page {
   display: flex;
   width: 1000px;
@@ -228,11 +224,5 @@
   .avatar-description {
     margin-left: 0;
     margin-top: 3rem;
-  }
-}
-
-@media (min-height: 1200px) {
-  .offer-page {
-    height: calc(100vh - 8rem - 12rem);
   }
 }

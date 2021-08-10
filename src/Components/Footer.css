@@ -3,8 +3,10 @@ footer {
   text-align: center;
   height: 8rem;
   background-color: #cac9c9;
-  /* position: fixed; */
-  /* bottom: 0; */
+
+  /* Responsive footer */
+  position: absolute;
+  bottom: 0;
 }
 
 .center-footer {

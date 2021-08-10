@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import LoaderSubmission from "./LoaderSubmission";
 import { currencyFormat } from "../helpers/helper";
 
@@ -8,7 +10,11 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const CheckoutForm = ({ product, handleLoaderSubmission }) => {
+const CheckoutForm = ({
+  product,
+  handleLoaderSubmission,
+  handleLoaderEnding,
+}) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -18,6 +24,13 @@ const CheckoutForm = ({ product, handleLoaderSubmission }) => {
 
   let history = useHistory();
 
+  useEffect(() => {
+    document.body.style.background = "var(--grey-background)"; // put body background to color white
+    return () => {
+      document.body.style.background = "white"; // reset body background to color white
+    };
+  }, []);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -26,6 +39,10 @@ const CheckoutForm = ({ product, handleLoaderSubmission }) => {
       const stripeResponse = await stripe.createToken(cardElement, {
         name: Cookies.get("token"),
       });
+      if (stripeResponse.error.message === "Your card number is incomplete.") {
+        alert(stripeResponse.error.message + " Edit the information");
+        handleLoaderEnding();
+      }
       const data = {
         stripeToken: stripeResponse.token.id,
         amount: (total * 100).toFixed(0), // unit: cents

@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--grey-background);
 }
 
 .payment-form {
@@ -93,17 +92,5 @@
 @media (max-width: 576px) {
   .payment-form {
     width: 80vw;
-  }
-}
-
-@media (min-height: 700px) {
-  .container-form-payment {
-    height: calc(100vh - 8rem);
-  }
-}
-
-@media (orientation: landscape) {
-  .container-form-payment {
-    height: auto;
   }
 }

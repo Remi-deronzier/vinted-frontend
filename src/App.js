@@ -67,6 +67,15 @@ const App = () => {
       .classList.remove("loader-circle-hidden"); // Launch the loader
   };
 
+  const handleLoaderEnding = () => {
+    // Enable the button after the request
+    document.querySelector("#submit-btn").removeAttribute("disabled");
+    // Stop the loader
+    document
+      .querySelector(".loader-circle")
+      .classList.add("loader-circle-hidden");
+  };
+
   return (
     <Router>
       {showSignupModal && (
@@ -125,6 +134,7 @@ const App = () => {
           <PaymentPage
             isConnected={isConnected}
             handleLoaderSubmission={handleLoaderSubmission}
+            handleLoaderEnding={handleLoaderEnding}
           />
         </Route>
         <Route path="/how-it-works">
