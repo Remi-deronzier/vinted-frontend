@@ -39,10 +39,6 @@ const CheckoutForm = ({
       const stripeResponse = await stripe.createToken(cardElement, {
         name: Cookies.get("token"),
       });
-      if (stripeResponse.error.message === "Your card number is incomplete.") {
-        alert(stripeResponse.error.message + " Edit the information");
-        handleLoaderEnding();
-      }
       const data = {
         stripeToken: stripeResponse.token.id,
         amount: (total * 100).toFixed(0), // unit: cents
@@ -57,6 +53,7 @@ const CheckoutForm = ({
       }
     } catch (error) {
       alert("an error has occured");
+      handleLoaderEnding();
     }
   };
 
