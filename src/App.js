@@ -84,6 +84,7 @@ const App = () => {
           setShowLoginModal={setShowLoginModal}
           handleLoginSignup={handleLoginSignup}
           handleLoaderSubmission={handleLoaderSubmission}
+          handleLoaderEnding={handleLoaderEnding}
         />
       )}
       {showLoginModal && (
@@ -92,6 +93,7 @@ const App = () => {
           setShowSignupModal={setShowSignupModal}
           handleLoginSignup={handleLoginSignup}
           handleLoaderSubmission={handleLoaderSubmission}
+          handleLoaderEnding={handleLoaderEnding}
         />
       )}
       <Header

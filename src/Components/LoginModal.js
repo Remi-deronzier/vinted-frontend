@@ -13,6 +13,7 @@ const LoginModal = ({
   setShowSignupModal,
   handleLoginSignup,
   handleLoaderSubmission,
+  handleLoaderEnding,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +39,13 @@ const LoginModal = ({
       setShowSignupModal(false);
       history.push("/publish");
     } catch (error) {
-      alert(error.message);
+      const errorMessage = error.response.data.message;
+      if (errorMessage === "Unauthorized") {
+        alert("Wrong email or password");
+      } else {
+        alert(error.response.data.message);
+      }
+      handleLoaderEnding();
     }
   };
 

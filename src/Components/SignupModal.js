@@ -14,6 +14,7 @@ const SignupModal = ({
   setShowLoginModal,
   handleLoginSignup,
   handleLoaderSubmission,
+  handleLoaderEnding,
 }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -43,7 +44,8 @@ const SignupModal = ({
       setShowLoginModal(false);
       history.push("/?onboarding=true");
     } catch (error) {
-      alert(error.message);
+      alert(error.response.data.message);
+      handleLoaderEnding();
     }
   };
 
