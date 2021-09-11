@@ -2,8 +2,9 @@
 
 <h1 align="center">Vinted clone - React</h1>
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/49198371/132921131-74e9a9eb-7979-4393-b6f1-044351f41e65.gif" alt="vinted-demo"/>
+  <img src="https://user-images.githubusercontent.com/49198371/132949367-9120df43-d5bc-4f2b-b104-6438a621421b.gif" alt="vinted-demo"/>
 </p>
+
 
 ## Demo
 👉 [See the web app](https://eloquent-hodgkin-fdeea0.netlify.app/)
