@@ -136,6 +136,15 @@ const PublishPage = ({ isConnected, handleLoaderSubmission }) => {
             <p className="p-publish-picture">Ajoute jusqu'à 5 photos</p>
             <div
               {...getRootProps({
+                onClick: (event) => {
+                  if (
+                    event.target.nodeName === "path" ||
+                    event.target.nodeName === "svg"
+                  ) {
+                    // prevent react-dropzone from opening the file explorer when the user click on the close button of an image
+                    event.stopPropagation();
+                  }
+                },
                 className:
                   preview.length === 0
                     ? "dropzone-no-pictures"
@@ -149,6 +158,7 @@ const PublishPage = ({ isConnected, handleLoaderSubmission }) => {
                     <div key={index}>
                       <img src={url} alt={files[index].name} />
                       <FontAwesomeIcon
+                        id="test"
                         icon="window-close"
                         className="btn-close"
                         onClick={() => handleDeletePicture(index)}
